@@ -11,12 +11,46 @@ import NextHead from "next/head"
 
 
 
-export function Nextlink_ff75242d77b4ffdaf869ddfe51a162d9 () {
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
+  )
+}
+
+export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_123926a228ab954b33ec736733dffdba = useCallback((_e) => addEvents([Event("_redirect", {path:`https://reflex.dev/docs/getting-started/introduction`,external:false})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_123926a228ab954b33ec736733dffdba} size={`4`}>
+  {`Check out our docs!`}
+</RadixThemesButton>
+  )
+}
+
+export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
   {`Graph`}
 </NextLink>
   )
@@ -51,40 +85,6 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_123926a228ab954b33ec736733dffdba = useCallback((_e) => addEvents([Event("_redirect", {path:`https://reflex.dev/docs/getting-started/introduction`,external:false})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_123926a228ab954b33ec736733dffdba} size={`4`}>
-  {`Check out our docs!`}
-</RadixThemesButton>
-  )
-}
-
-export function Nextlink_bc508f90047fc8cc7c78ce28130b8943 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
-  )
-}
-
-export function Nextlink_05baa6aef718f122c74fcaa3b2b805f1 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
-  )
-}
-
 export default function Component() {
 
   return (
@@ -93,8 +93,8 @@ export default function Component() {
   <RadixThemesFlex align={`start`} css={{"height": "100vh", "alignItems": "center", "flexDirection": "column"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true}>
-  <NextLink css={{"&:hover": {"textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
-  <RadixThemesHeading size={`6`}>
+  <NextLink css={{"&:hover": {"transition": "transform 0.2s ease-in-out", "textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
+  <RadixThemesHeading size={`7`}>
   {`TruckrZzz`}
 </RadixThemesHeading>
 </NextLink>
@@ -102,15 +102,15 @@ export default function Component() {
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}} gap={`4`}>
   <RadixThemesLink asChild={true}>
-  <Nextlink_05baa6aef718f122c74fcaa3b2b805f1/>
+  <Nextlink_c25d099bee075c5dafd83024f1c90dc6/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_bc508f90047fc8cc7c78ce28130b8943/>
+  <Nextlink_eada45837dd5269791f8cd2d6c85f84e/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_ff75242d77b4ffdaf869ddfe51a162d9/>
+  <Nextlink_b0ee6904d0980f25e02c4adbcbfdba05/>
 </RadixThemesLink>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>

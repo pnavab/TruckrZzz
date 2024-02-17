@@ -19,9 +19,10 @@ class Navbar(rx.Component):
         return rx.hstack(
             # The logo with larger text on the left.
             rx.link(
-                rx.heading("TruckrZzz", size="6"),
+                rx.heading("TruckrZzz", size="7"),
                 href="/",
                 _hover={
+                    "transition": "transform 0.2s ease-in-out",
                     "text_decor": "none",
                     "transform": "scale(1.1)",
                 }
@@ -29,11 +30,11 @@ class Navbar(rx.Component):
             rx.spacer(),
             # Centered text links "home", "dash", "graph".
             rx.center(
-                rx.link("Home", href="/", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected(""), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected(""), "underline", "none"), _hover={"text_decor": "underline"}),
+                rx.link("Home", href="/", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected(""), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
                 rx.spacer(width="20px"),
-                rx.link("Dashboard", href="/dashboard", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("dashboard"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"text_decor": "underline"}),
+                rx.link("Dashboard", href="/dashboard", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("dashboard"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
                 rx.spacer(width="20px"),
-                rx.link("Graph", href="/graphs/6", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("graphs"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"text_decor": "underline"}),
+                rx.link("Graph", href="/graphs/6", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("graphs"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
                 spacing="4"
             ),
             rx.spacer(),

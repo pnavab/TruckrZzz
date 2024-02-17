@@ -4,6 +4,7 @@ from rxconfig import config
 from TruckrZzz import *
 from TruckrZzz.components.navbar import navbar
 from TruckrZzz.graphs import *
+from TruckrZzz.dashboard import *
 
 import reflex as rx
 
