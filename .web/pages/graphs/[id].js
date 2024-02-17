@@ -11,76 +11,30 @@ import { Bar as RechartsBar, Brush as RechartsBrush, Legend as RechartsLegend, L
 import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
-const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
+const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 
 
-export function Fragment_037fffe1114b22fe280102dd33270023 () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__graph_state.user_id) ? (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Showing graph for user ${state__graph_state.user_id}`}
-</RadixThemesHeading>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Loading user id...`}
-</RadixThemesHeading>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Nextlink_05baa6aef718f122c74fcaa3b2b805f1 () {
+export function Nextlink_ff75242d77b4ffdaf869ddfe51a162d9 () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
 </NextLink>
   )
 }
 
-export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
+export function Button_9597603d890ab5f8238396802458a589 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
 
-
-  return (
-    <RechartsResponsiveContainer height={400} width={600}>
-  <RechartsLineChart data={state__graph_state.data} height={`100%`} width={`100%`}>
-  <RechartsLine dataKey={`sleepy`} stroke={`#FF0000`} type={`monotone`}/>
-  <RechartsLine dataKey={`awake`} stroke={`#8884d8`} type={`monotone`}/>
-  <RechartsXAxis dataKey={`name`}/>
-  <RechartsYAxis/>
-  <RechartsTooltip/>
-  <RechartsLegend/>
-</RechartsLineChart>
-</RechartsResponsiveContainer>
-  )
-}
-
-export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
+  const on_click_7cb754e9fe2cc1791459bafa2f353962 = useCallback((_e) => addEvents([Event("_download", {url:`/reflex_logo.png`,filename:`different_name_logo.png`})], (_e), {}), [addEvents, Event])
 
   return (
-    <RechartsResponsiveContainer height={400} width={600}>
-  <RechartsBarChart data={state__graph_state.data} height={`100%`} width={`100%`}>
-  <RechartsBar dataKey={`sleepy`} fill={`#FF0000`} stroke={`#FF0000`}/>
-  <RechartsBar dataKey={`awake`} fill={`#8884d8`} stroke={`#8884d8`}/>
-  <RechartsBrush dataKey={`name`} height={30} stroke={`#8884d8`}/>
-  <RechartsXAxis dataKey={`name`}/>
-  <RechartsYAxis/>
-</RechartsBarChart>
-</RechartsResponsiveContainer>
+    <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
+  {`Download Graph`}
+</RadixThemesButton>
   )
 }
 
@@ -113,38 +67,20 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Button_a695194693785e30b0c4f941e9a86e95 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_7e7fff77226b6a18488c90e7047c1922 = useCallback((_e) => addEvents([Event("state.graph_state.toggle_streaming", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton color={`blue`} onClick={on_click_7e7fff77226b6a18488c90e7047c1922}>
-  {`Toggle Streaming`}
-</RadixThemesButton>
-  )
-}
-
-export function Button_9597603d890ab5f8238396802458a589 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_7cb754e9fe2cc1791459bafa2f353962 = useCallback((_e) => addEvents([Event("_download", {url:`/reflex_logo.png`,filename:`different_name_logo.png`})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
-  {`Download Graph`}
-</RadixThemesButton>
-  )
-}
-
-export function Nextlink_ff75242d77b4ffdaf869ddfe51a162d9 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
+  const state__graph_state = useContext(StateContexts.state__graph_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
-</NextLink>
+    <RechartsResponsiveContainer height={400} width={600}>
+  <RechartsBarChart data={state__graph_state.data} height={`100%`} width={`100%`}>
+  <RechartsBar dataKey={`sleepy`} fill={`#FF0000`} stroke={`#FF0000`}/>
+  <RechartsBar dataKey={`awake`} fill={`#8884d8`} stroke={`#8884d8`}/>
+  <RechartsBrush dataKey={`name`} height={30} stroke={`#8884d8`}/>
+  <RechartsXAxis dataKey={`name`}/>
+  <RechartsYAxis/>
+</RechartsBarChart>
+</RechartsResponsiveContainer>
   )
 }
 
@@ -159,12 +95,76 @@ export function Nextlink_bc508f90047fc8cc7c78ce28130b8943 () {
   )
 }
 
+export function Nextlink_05baa6aef718f122c74fcaa3b2b805f1 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
+  )
+}
+
+export function Button_a695194693785e30b0c4f941e9a86e95 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_7e7fff77226b6a18488c90e7047c1922 = useCallback((_e) => addEvents([Event("state.graph_state.toggle_streaming", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton color={`blue`} onClick={on_click_7e7fff77226b6a18488c90e7047c1922}>
+  {`Toggle Streaming`}
+</RadixThemesButton>
+  )
+}
+
+export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
+  const state__graph_state = useContext(StateContexts.state__graph_state)
+
+
+  return (
+    <RechartsResponsiveContainer height={400} width={600}>
+  <RechartsLineChart data={state__graph_state.data} height={`100%`} width={`100%`}>
+  <RechartsLine dataKey={`sleepy`} stroke={`#FF0000`} type={`monotone`}/>
+  <RechartsLine dataKey={`awake`} stroke={`#8884d8`} type={`monotone`}/>
+  <RechartsXAxis dataKey={`name`}/>
+  <RechartsYAxis/>
+  <RechartsTooltip/>
+  <RechartsLegend/>
+</RechartsLineChart>
+</RechartsResponsiveContainer>
+  )
+}
+
+export function Fragment_037fffe1114b22fe280102dd33270023 () {
+  const state__graph_state = useContext(StateContexts.state__graph_state)
+
+
+  return (
+    <Fragment>
+  {isTrue(state__graph_state.user_id) ? (
+  <Fragment>
+  <RadixThemesHeading>
+  {`Showing graph for user ${state__graph_state.user_id}`}
+</RadixThemesHeading>
+</Fragment>
+) : (
+  <Fragment>
+  <RadixThemesHeading>
+  {`Loading user id...`}
+</RadixThemesHeading>
+</Fragment>
+)}
+</Fragment>
+  )
+}
+
 export default function Component() {
 
   return (
     <Fragment>
   <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"alignItems": "center", "flexDirection": "column"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true}>
   <NextLink css={{"&:hover": {"textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>

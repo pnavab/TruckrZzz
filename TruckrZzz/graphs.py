@@ -127,5 +127,6 @@ def graphs() -> rx.Component:
                 url="/reflex_logo.png",
                 filename="different_name_logo.png",
             ),
-        )
+        ),
+        align_items="center"
     )

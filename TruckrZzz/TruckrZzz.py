@@ -18,7 +18,6 @@ class State(rx.State):
 def index() -> rx.Component:
     return rx.vstack(
         navbar(),
-        rx.theme_panel(),
         rx.vstack(
             rx.heading("Welcome to Reflex!", size="9"),
             rx.text("Get started by editing ", rx.code(filename)),
@@ -32,6 +31,7 @@ def index() -> rx.Component:
             font_size="2em",
         ),
         height="100vh",
+        align_items="center"
     )
 
 

@@ -4,12 +4,23 @@
 import { Fragment, useCallback, useContext } from "react"
 import { EventLoopContext, StateContexts } from "/utils/context"
 import { Event, getBackendURL, isTrue } from "/utils/state"
-import { Button as RadixThemesButton, Code as RadixThemesCode, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText, ThemePanel as RadixThemesThemePanel } from "@radix-ui/themes"
+import { Button as RadixThemesButton, Code as RadixThemesCode, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
 import NextHead from "next/head"
 
 
+
+export function Nextlink_ff75242d77b4ffdaf869ddfe51a162d9 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
+</NextLink>
+  )
+}
 
 export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
@@ -40,17 +51,6 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Nextlink_ff75242d77b4ffdaf869ddfe51a162d9 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
-</NextLink>
-  )
-}
-
 export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -60,17 +60,6 @@ export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
     <RadixThemesButton onClick={on_click_123926a228ab954b33ec736733dffdba} size={`4`}>
   {`Check out our docs!`}
 </RadixThemesButton>
-  )
-}
-
-export function Nextlink_05baa6aef718f122c74fcaa3b2b805f1 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
   )
 }
 
@@ -85,12 +74,23 @@ export function Nextlink_bc508f90047fc8cc7c78ce28130b8943 () {
   )
 }
 
+export function Nextlink_05baa6aef718f122c74fcaa3b2b805f1 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
+  )
+}
+
 export default function Component() {
 
   return (
     <Fragment>
   <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
-  <RadixThemesFlex align={`start`} css={{"height": "100vh", "flexDirection": "column"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"height": "100vh", "alignItems": "center", "flexDirection": "column"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true}>
   <NextLink css={{"&:hover": {"textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
@@ -120,7 +120,6 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
 </RadixThemesFlex>
-  <RadixThemesThemePanel/>
   <RadixThemesFlex align={`center`} css={{"fontSize": "2em", "flexDirection": "column"}} gap={`7`}>
   <RadixThemesHeading size={`9`}>
   {`Welcome to Reflex!`}
