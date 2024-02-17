@@ -5,7 +5,7 @@ from TruckrZzz import *
 from TruckrZzz.components.navbar import navbar
 from TruckrZzz.graphs import *
 from TruckrZzz.dashboard import *
-
+from TruckrZzz.webcam import *
 import reflex as rx
 
 docs_url = "https://reflex.dev/docs/getting-started/introduction"

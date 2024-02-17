@@ -1,6 +1,7 @@
 """The dashboard page."""
 from TruckrZzz import styles
 from TruckrZzz.components.navbar import navbar, NavbarState
+from TruckrZzz.graphs import GraphState
 from sqlmodel import Field, SQLModel, select, JSON
 from sqlalchemy import Column
 import reflex as rx
@@ -22,7 +23,7 @@ with rx.session() as session:
     session.add(Trucker(name="bob", device_id="dsf98723", data=[
         {"name": "Start", "awake": 7, "sleepy": None},
         {"name": "Start", "awake": 9, "sleepy": 9},
-        {"name": "Start", "awake": 5, "sleepy": None},
+        {"name": "Start", "awake": 8, "sleepy": None},
     ]))
     session.commit()
 
@@ -46,6 +47,20 @@ class DashboardState(rx.State):
         with rx.session() as session:
             trucker = session.exec(select(Trucker).where(Trucker.id == trucker_id)).first()
             return trucker.graph_data if trucker else "Trucker not found"
+        
+    def get_last_sleepiness_value_by_id(self, trucker_id):
+        with rx.session() as session:
+            trucker = session.exec(select(Trucker).where(Trucker.id == trucker_id)).first()
+            last_val = trucker.graph_data[-1]
+            if last_val["sleepy"] is not None and last_val["sleepy"] < GraphState.sleepiness_value:
+                last_val = last_val["sleepy"]
+            else:
+                last_val = last_val["awake"]
+            return last_val
+        
+    async def update_last_sleepiness_value(self, id):
+        self.last_val = await self.get_last_sleepiness_value_by_id(id)
+        yield
         
     # Delete a trucker by id
     def delete_trucker_by_id(self, id):
@@ -83,7 +98,6 @@ class DashboardState(rx.State):
     def update_filtered_data(self, new_data: list[dict]):
         self.filtered_truckers_data = new_data
 
-    # @rx.cached_var
     def submit_search(self):
         if self.search_query == "":
             self.update_filtered_data([])
@@ -95,14 +109,28 @@ class DashboardState(rx.State):
             ]
             self.update_filtered_data(updated_data)
 
-    def reset_state(self):
-        self.reset()
+    # def reset_state(self): # can delete i think
+    #     self.reset()
+
+#substates
+# trucker_states = {trucker['id']: DashboardState() for trucker in DashboardState.truckers_data}
+
+# Now for each trucker, you can manage their 'last_val' individually
+# for trucker_id, state in trucker_states.items():
+#     # Call the event handler to update 'last_val' for each trucker
+#     state.update_last_sleepiness_value(trucker_id)
 
 def display_trucker(trucker: dict):
     path = f"/graphs/{trucker['device_id']}"
+    # last_val = trucker['graph_data'][-1]["awake"]
+    last_val = 8
     return rx.hstack(
         rx.box(
-            rx.text(f"ID: {trucker['id']}, Name: {trucker['name']}, Device ID: {trucker['device_id']}"),
+            rx.cond(
+                last_val,
+                rx.text(f"ID: {trucker['id']}, Name: {trucker['name']}, Device ID: {trucker['device_id']}, Last Sleepiness Value: {last_val}"),
+                rx.text("Loading data...")
+            ),
             padding="1em",
             border="1px solid #DDD",
             border_radius="10px",
@@ -147,7 +175,7 @@ def dashboard() -> rx.Component:
             rx.text("Fetching users...")
         ),
         rx.cond(
-            DashboardState.filtered_truckers_data.length() > 0,
+            DashboardState.filtered_truckers_data.length() > 0, #adding a second conditional appended escape unicode characters
             rx.vstack(
                 rx.foreach(
                     DashboardState.filtered_truckers_data, display_trucker
@@ -159,7 +187,8 @@ def dashboard() -> rx.Component:
                 )
             ),
         ),
-        align_items="center"
+        align_items="center",
+        width="60%"
     )
 
 class PopoverState(rx.State):
@@ -181,5 +210,27 @@ def submit_popover():
                 ),
                 on_submit=DashboardState.add_trucker(PopoverState.name, PopoverState.device_id)
             )
-        )
+        ),
+        position="fixed",
+        bottom="0px",
+        left="0px",
+        z_index="10" 
     )
+
+
+# # a nother attempt with sub states
+# def render_trucker(trucker, trucker_state: TruckerState):
+#     return rx.hstack(
+#         rx.box(
+#             rx.cond(
+#                 trucker_state.last_val,
+#                 rx.text(f"ID: {trucker['id']}, Name: {trucker['name']}, Device ID: {trucker['device_id']}, Last Sleepiness Value: {trucker_state.last_val}"),
+#                 rx.text("Loading data...")
+#             )
+#         )
+#     )
+
+# # Assuming `truckers_list` is a list of trucker dictionaries and `trucker_states` is a dictionary mapping trucker ids to their respective substates
+# def render_truckers(truckers_list, trucker_states):
+#     return rx.foreach(truckers_list, lambda trucker: render_trucker(trucker, trucker_states[trucker['id']]))
+    

@@ -37,6 +37,7 @@ class GraphState(rx.State):
         if self.running:
             return GraphState.get_api_data
     
+    sleepiness_value = 4 # change the value to the real sleepiness value
     #httpx is required in order to make async calls with reflex
     @rx.background
     async def get_api_data(self):
@@ -52,14 +53,13 @@ class GraphState(rx.State):
                 response = httpx.get('http://localhost:8001/sleepiness')
                 data = response.json()
                 value = data['value']
-                sleepiness_value = 4 # change the value to the real sleepiness value
                 data_to_append = {"name": timestamp}
-                if(value < sleepiness_value):
+                if(value < self.sleepiness_value):
                     if self.data[-1]["awake"] is not None:
                         self.data[-1]["sleepy"] = self.data[-1]["awake"]
                     data_to_append["awake"] = None
                     data_to_append["sleepy"] = value
-                elif(value >= sleepiness_value):
+                elif(value >= self.sleepiness_value):
                     if self.data[-1]["awake"] is None:
                         data_to_append["sleepy"] = value # will make the whole valley red
                         # self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red

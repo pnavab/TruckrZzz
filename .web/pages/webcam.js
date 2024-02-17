@@ -7,12 +7,10 @@ import { Event, getBackendURL, isTrue } from "/utils/state"
 import { Button as RadixThemesButton, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
-import { Bar as RechartsBar, Brush as RechartsBrush, Legend as RechartsLegend, Line as RechartsLine, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip, XAxis as RechartsXAxis, YAxis as RechartsYAxis } from "recharts"
 import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
-const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
-const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 
 export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
@@ -26,84 +24,12 @@ export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
   )
 }
 
-export function Button_a695194693785e30b0c4f941e9a86e95 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_7e7fff77226b6a18488c90e7047c1922 = useCallback((_e) => addEvents([Event("state.graph_state.toggle_streaming", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton color={`blue`} onClick={on_click_7e7fff77226b6a18488c90e7047c1922}>
-  {`Toggle Streaming`}
-</RadixThemesButton>
-  )
-}
-
-export function Fragment_037fffe1114b22fe280102dd33270023 () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
+export function Reactplayer_d88a5a8a051c753e674b0f1f73a0b040 () {
+  const state__webcam_state = useContext(StateContexts.state__webcam_state)
 
 
   return (
-    <Fragment>
-  {isTrue(state__graph_state.user_id) ? (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Showing graph for user ${state__graph_state.user_id}`}
-</RadixThemesHeading>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Loading user id...`}
-</RadixThemesHeading>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
-
-  return (
-    <RechartsResponsiveContainer height={400} width={600}>
-  <RechartsBarChart data={state__graph_state.data} height={`100%`} width={`100%`}>
-  <RechartsBar dataKey={`sleepy`} fill={`#FF0000`} stroke={`#FF0000`}/>
-  <RechartsBar dataKey={`awake`} fill={`#8884d8`} stroke={`#8884d8`}/>
-  <RechartsBrush dataKey={`name`} height={30} stroke={`#8884d8`}/>
-  <RechartsXAxis dataKey={`name`}/>
-  <RechartsYAxis/>
-</RechartsBarChart>
-</RechartsResponsiveContainer>
-  )
-}
-
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
-  )
-}
-
-export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
-
-  return (
-    <RechartsResponsiveContainer height={400} width={600}>
-  <RechartsLineChart data={state__graph_state.data} height={`100%`} width={`100%`}>
-  <RechartsLine dataKey={`sleepy`} stroke={`#FF0000`} type={`monotone`}/>
-  <RechartsLine dataKey={`awake`} stroke={`#8884d8`} type={`monotone`}/>
-  <RechartsXAxis dataKey={`name`}/>
-  <RechartsYAxis/>
-  <RechartsTooltip/>
-  <RechartsLegend/>
-</RechartsLineChart>
-</RechartsResponsiveContainer>
+    <ReactPlayer controls={true} height={`auto`} url={`data:image/jpeg;base64,${state__webcam_state.processed_frame}`} width={`400px`}/>
   )
 }
 
@@ -147,14 +73,25 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Button_9597603d890ab5f8238396802458a589 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
-  const on_click_7cb754e9fe2cc1791459bafa2f353962 = useCallback((_e) => addEvents([Event("_download", {url:`/reflex_logo.png`,filename:`different_name_logo.png`})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
-  {`Download Graph`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Button_aa37913fbfff9bafdfa6991b200da2fe () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_1103c5a6136a6d97d4adae608c39e3b2 = useCallback((_e) => addEvents([Event("state.webcam_state.capture_and_process_webcam", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_1103c5a6136a6d97d4adae608c39e3b2}>
+  {`Start`}
 </RadixThemesButton>
   )
 }
@@ -164,7 +101,7 @@ export default function Component() {
   return (
     <Fragment>
   <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
-  <RadixThemesFlex align={`start`} css={{"alignItems": "center", "flexDirection": "column"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true}>
   <NextLink css={{"&:hover": {"transition": "transform 0.2s ease-in-out", "textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
@@ -194,17 +131,12 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
 </RadixThemesFlex>
-  <Fragment_037fffe1114b22fe280102dd33270023/>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
-  <Button_a695194693785e30b0c4f941e9a86e95/>
-  <Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a/>
-  <Responsivecontainer_9ab6f46295c1efadef663d4d94249fce/>
-</RadixThemesFlex>
-  <Button_9597603d890ab5f8238396802458a589/>
+  <Button_aa37913fbfff9bafdfa6991b200da2fe/>
+  <Reactplayer_d88a5a8a051c753e674b0f1f73a0b040/>
 </RadixThemesFlex>
   <NextHead>
   <title>
-  {`user graphs`}
+  {`webcam`}
 </title>
   <meta content={`A Reflex app.`} name={`description`}/>
   <meta content={`favicon.ico`} property={`og:image`}/>
