@@ -12,40 +12,6 @@ import NextHead from "next/head"
 
 
 
-export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
-</NextLink>
-  )
-}
-
-export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
-  )
-}
-
-export function Button_aa37913fbfff9bafdfa6991b200da2fe () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_1103c5a6136a6d97d4adae608c39e3b2 = useCallback((_e) => addEvents([Event("state.webcam_state.capture_and_process_webcam", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_1103c5a6136a6d97d4adae608c39e3b2}>
-  {`Start`}
-</RadixThemesButton>
-  )
-}
-
 export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
@@ -57,24 +23,43 @@ export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
   )
 }
 
-export function Img_fe04a29112b85cd362a6fe8d7bab8bc1 () {
+export function Fragment_3a7c8ba9118c7b795095bbb5575818b4 () {
   const state__webcam_state = useContext(StateContexts.state__webcam_state)
 
 
   return (
-    <img src={state__webcam_state.processed_frame}/>
+    <Fragment>
+  {isTrue(state__webcam_state.drowsy) ? (
+  <Fragment>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <Script strategy={`afterInteractive`}>
+  {`
+            var button_sfx = new Audio("/scream.mp3")
+            button_sfx.load()
+            button_sfx.play()
+            `}
+</Script>
+</RadixThemesFlex>
+</Fragment>
+) : (
+  <Fragment>
+  <RadixThemesText as={`p`}>
+  {`awake.....`}
+</RadixThemesText>
+</Fragment>
+)}
+</Fragment>
   )
 }
 
-export function Button_e6a110a5bf826bb5e316ec2ecbb93b19 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
-  const on_click_dc7b5a346a37c96022f0bf22c3e84779 = useCallback((_e) => addEvents([Event("_call_script", {javascript_code:`playFromStart(button_sfx)`})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesButton onClick={on_click_dc7b5a346a37c96022f0bf22c3e84779}>
-  {`Play Immediately`}
-</RadixThemesButton>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
   )
 }
 
@@ -104,6 +89,38 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   <Fragment/>
 )}
 </Fragment>
+  )
+}
+
+export function Img_fe04a29112b85cd362a6fe8d7bab8bc1 () {
+  const state__webcam_state = useContext(StateContexts.state__webcam_state)
+
+
+  return (
+    <img src={state__webcam_state.processed_frame}/>
+  )
+}
+
+export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
+</NextLink>
+  )
+}
+
+export function Button_aa37913fbfff9bafdfa6991b200da2fe () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_1103c5a6136a6d97d4adae608c39e3b2 = useCallback((_e) => addEvents([Event("state.webcam_state.capture_and_process_webcam", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_1103c5a6136a6d97d4adae608c39e3b2}>
+  {`Start`}
+</RadixThemesButton>
   )
 }
 
@@ -143,16 +160,8 @@ export default function Component() {
 </RadixThemesLink>
 </RadixThemesFlex>
   <Button_aa37913fbfff9bafdfa6991b200da2fe/>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
-  <Script strategy={`afterInteractive`}>
-  {`
-            var button_sfx = new Audio("/scream.mp3")
-            function playFromStart (sfx) {sfx.load(); sfx.play()}
-            `}
-</Script>
-  <Button_e6a110a5bf826bb5e316ec2ecbb93b19/>
-</RadixThemesFlex>
   <Img_fe04a29112b85cd362a6fe8d7bab8bc1/>
+  <Fragment_3a7c8ba9118c7b795095bbb5575818b4/>
 </RadixThemesFlex>
   <NextHead>
   <title>

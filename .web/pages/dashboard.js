@@ -15,36 +15,35 @@ import NextHead from "next/head"
 
 
 
-export function Root_73107f8974a03c21e2eae3fe979701e6 () {
-  
-    const handleSubmit_559be44f8ef55201ba35f5e2471064bc = useCallback((ev) => {
-        const $form = ev.target
-        ev.preventDefault()
-        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
-
-        addEvents([Event("state.dashboard_state.add_trucker", {name:state__popover_state.name,device_id:state__popover_state.device_id})])
-
-        if (false) {
-            $form.reset()
-        }
-    })
-    
-  const state__popover_state = useContext(StateContexts.state__popover_state)
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <RadixFormRoot className={`Root`} onSubmit={handleSubmit_559be44f8ef55201ba35f5e2471064bc}>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
-  <Textfield__input_e791d397d9ca3a824e9795a2a6985cae/>
-  <Textfield__input_a4ad24278cbaaa7d9f457ae5ff2f3928/>
-  <RadixThemesPopover.Close>
-  <RadixThemesButton type={`submit`}>
-  {`Submit`}
-</RadixThemesButton>
-</RadixThemesPopover.Close>
-</RadixThemesFlex>
-</RadixFormRoot>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Textfield__input_e791d397d9ca3a824e9795a2a6985cae () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_change_2cb8445ebf7e3d2aee28071d87eef3e0 = useCallback((_e0) => addEvents([Event("state.popover_state.set_name", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesTextField.Input name={`name`} onChange={on_change_2cb8445ebf7e3d2aee28071d87eef3e0} placeholder={`Name`}/>
+  )
+}
+
+export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
   )
 }
 
@@ -60,7 +59,36 @@ export function Button_72ce6a135682ba23b0237edfc05ed74b () {
   )
 }
 
-export function Fragment_e4728d49899961de78511584fdcb9e00 () {
+export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(connectError !== null) ? (
+  <Fragment>
+  <RadixThemesDialog.Root open={connectError !== null}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectError !== null) ? connectError.message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_f5a4dd192d168f8ad8e9121ecea02e79 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
   const state__dashboard_state = useContext(StateContexts.state__dashboard_state)
 
@@ -130,32 +158,14 @@ export function Fragment_e4728d49899961de78511584fdcb9e00 () {
   )
 }
 
-export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <Fragment>
-  {isTrue(connectError !== null) ? (
-  <Fragment>
-  <RadixThemesDialog.Root open={connectError !== null}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectError !== null) ? connectError.message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
+</NextLink>
   )
 }
 
@@ -169,56 +179,36 @@ export function Textfield__input_a4ad24278cbaaa7d9f457ae5ff2f3928 () {
   )
 }
 
-export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+export function Root_73107f8974a03c21e2eae3fe979701e6 () {
+  
+    const handleSubmit_559be44f8ef55201ba35f5e2471064bc = useCallback((ev) => {
+        const $form = ev.target
+        ev.preventDefault()
+        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
 
+        addEvents([Event("state.dashboard_state.add_trucker", {name:state__popover_state.name,device_id:state__popover_state.device_id})])
 
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
-</NextLink>
-  )
-}
-
-export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
-  )
-}
-
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
-  )
-}
-
-export function Textfield__input_c6435dbbe72415c72b3e380d81ff1569 () {
+        if (false) {
+            $form.reset()
+        }
+    })
+    
+  const state__popover_state = useContext(StateContexts.state__popover_state)
   const [addEvents, connectError] = useContext(EventLoopContext);
 
-  const on_change_572fb2e0cad214cc8586dc27d01cea55 = useCallback((_e0) => addEvents([Event("state.dashboard_state.set_search_query", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
 
   return (
-    <RadixThemesTextField.Input css={{"width": "100%", "borderRadius": "15px"}} onChange={on_change_572fb2e0cad214cc8586dc27d01cea55} placeholder={`Search for truckers`}/>
-  )
-}
-
-export function Textfield__input_e791d397d9ca3a824e9795a2a6985cae () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_change_2cb8445ebf7e3d2aee28071d87eef3e0 = useCallback((_e0) => addEvents([Event("state.popover_state.set_name", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesTextField.Input name={`name`} onChange={on_change_2cb8445ebf7e3d2aee28071d87eef3e0} placeholder={`Name`}/>
+    <RadixFormRoot className={`Root`} onSubmit={handleSubmit_559be44f8ef55201ba35f5e2471064bc}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
+  <Textfield__input_e791d397d9ca3a824e9795a2a6985cae/>
+  <Textfield__input_a4ad24278cbaaa7d9f457ae5ff2f3928/>
+  <RadixThemesPopover.Close>
+  <RadixThemesButton type={`submit`}>
+  {`Submit`}
+</RadixThemesButton>
+</RadixThemesPopover.Close>
+</RadixThemesFlex>
+</RadixFormRoot>
   )
 }
 
@@ -238,6 +228,16 @@ export function Fragment_55c98eef18d01d4fb1795dee98278242 () {
   <Fragment/>
 )}
 </Fragment>
+  )
+}
+
+export function Textfield__input_c6435dbbe72415c72b3e380d81ff1569 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_change_572fb2e0cad214cc8586dc27d01cea55 = useCallback((_e0) => addEvents([Event("state.dashboard_state.set_search_query", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesTextField.Input css={{"width": "100%", "borderRadius": "15px"}} onChange={on_change_572fb2e0cad214cc8586dc27d01cea55} placeholder={`Search for truckers`}/>
   )
 }
 
@@ -294,7 +294,7 @@ export default function Component() {
   <Button_72ce6a135682ba23b0237edfc05ed74b/>
 </RadixThemesFlex>
   <Fragment_55c98eef18d01d4fb1795dee98278242/>
-  <Fragment_e4728d49899961de78511584fdcb9e00/>
+  <Fragment_f5a4dd192d168f8ad8e9121ecea02e79/>
 </RadixThemesFlex>
   <NextHead>
   <title>

@@ -4,13 +4,14 @@ import dlib
 import cv2
 import numpy as np
 
+import os
 
 EYE_ASPECT_RATIO_THRESH = 1.0
 
 CONSECUTIVE_WARNING_THRESH = 20
 
 DETECTOR = dlib.get_frontal_face_detector()
-PREDICTOR = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+PREDICTOR = dlib.shape_predictor("./TruckrZzz/shape_predictor_68_face_landmarks.dat")
 
 (L_START, L_END) = face_utils.FACIAL_LANDMARKS_68_IDXS["left_eye"]
 (R_START, R_END) = face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"]
@@ -74,15 +75,15 @@ class SleepDetector():
         return frame
 
 
-detector = SleepDetector(visualize=True)
-cap = cv2.VideoCapture(0)
-while True:
-    _, frame = cap.read()
-    out = detector.analyze_frame(frame)
+# detector = SleepDetector(visualize=True)
+# cap = cv2.VideoCapture(0)
+# while True:
+#     _, frame = cap.read()
+#     out = detector.analyze_frame(frame)
 
-    cv2.imshow("Frame", out)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+#     cv2.imshow("Frame", out)
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()

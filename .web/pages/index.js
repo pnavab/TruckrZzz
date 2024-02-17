@@ -11,26 +11,14 @@ import NextHead from "next/head"
 
 
 
-export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
 </NextLink>
-  )
-}
-
-export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_123926a228ab954b33ec736733dffdba = useCallback((_e) => addEvents([Event("_redirect", {path:`https://reflex.dev/docs/getting-started/introduction`,external:false})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_123926a228ab954b33ec736733dffdba} size={`4`}>
-  {`Check out our docs!`}
-</RadixThemesButton>
   )
 }
 
@@ -41,17 +29,6 @@ export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
   return (
     <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
   {`Home`}
-</NextLink>
-  )
-}
-
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
 </NextLink>
   )
 }
@@ -82,6 +59,29 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   <Fragment/>
 )}
 </Fragment>
+  )
+}
+
+export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
+</NextLink>
+  )
+}
+
+export function Button_d474754a9d7f8322123330cf11ed7fd1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_123926a228ab954b33ec736733dffdba = useCallback((_e) => addEvents([Event("_redirect", {path:`https://reflex.dev/docs/getting-started/introduction`,external:false})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_123926a228ab954b33ec736733dffdba} size={`4`}>
+  {`Check out our docs!`}
+</RadixThemesButton>
   )
 }
 

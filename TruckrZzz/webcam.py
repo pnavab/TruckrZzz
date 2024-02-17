@@ -4,11 +4,19 @@ import asyncio
 from PIL import Image
 from base64 import b64encode
 from TruckrZzz.components.navbar import navbar
+from TruckrZzz.landmark import SleepDetector
 
+detector = SleepDetector(visualize=True)
 class WebcamState(rx.State):
     # Assuming `processed_frame` is a variable that holds the processed frame data
     processed_frame: str = ""
-    drowsy: int
+    drowsy: bool
+
+    # def watch_for_drowsy(self):
+    #     if self.drowsy:
+    #         return rx.call_script(
+    #             "playFromStart(button_sfx)"
+    #         ),
 
     def update_drowsy_state(self, new):
         self.drowsy = new
@@ -25,10 +33,12 @@ class WebcamState(rx.State):
                 # _, buffer = cv2.imencode('.jpg', processed_frame)
                 # async with self:
                 #     self.processed_frame = b64encode(buffer).decode('utf-8')
+                out = detector.analyze_frame(frame)
 
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                frame = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
                 im_pil = Image.fromarray(frame)
                 async with self:
+                    self.update_drowsy_state(detector.drowsy)
                     self.processed_frame = im_pil
                 yield  # Yield control to allow the frontend to update
                 await asyncio.sleep(0.01)  # Small sleep to allow other tasks to run
@@ -43,14 +53,19 @@ def sound_effect_demo():
         rx.script(
             """
             var button_sfx = new Audio("/scream.mp3")
-            function playFromStart (sfx) {sfx.load(); sfx.play()}
+            button_sfx.load()
+            button_sfx.play()
             """
         ),
-        rx.button(
-            "Play Immediately",
-            on_click=rx.call_script(
-                "playFromStart(button_sfx)"
-            ),
+    )
+
+def sound_stop():
+    return rx.hstack(
+        rx.script(
+            """
+            var button_sfx = new Audio("/scream.mp3")
+            button_sfx.pause()
+            """
         ),
     )
 
@@ -60,11 +75,10 @@ def webcam_page():
     return rx.vstack(
         navbar(),
         rx.button("Start", on_click=WebcamState.capture_and_process_webcam),
-        sound_effect_demo(),
-        # rx.video(
-        #     url=f"data:image/jpeg;base64,{WebcamState.processed_frame}",
-        #     width="400px",
-        #     height="auto",
-        # ),
         rx.image(src=WebcamState.processed_frame),
+        rx.cond(
+            WebcamState.drowsy,
+            sound_effect_demo(),
+            rx.text("awake.....")
+        )
     )
