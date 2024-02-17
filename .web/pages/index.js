@@ -45,6 +45,17 @@ export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
   )
 }
 
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
 export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -71,17 +82,6 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   <Fragment/>
 )}
 </Fragment>
-  )
-}
-
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
   )
 }
 
