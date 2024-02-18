@@ -61,12 +61,12 @@ def webcam_page():
     return rx.vstack(navbar(), (rx.chakra.center(
         rx.chakra.box(
             rx.chakra.image(src="/pngtree-iphone-14-png-image_6538682.png",
-                            width="150%", height="150%", z_index="-1"),
+                            width="50vw", height="80vh", z_index="-1"),
             position="relative"
         ),
         rx.chakra.box(
             rx.chakra.image(src=WebcamState.processed_frame,
-                            width="80%", height="auto"),
+                            width="17vw", height="40vh"),
             position="absolute",
             top="40%",
             left="50%",

@@ -85,7 +85,7 @@ def index() -> rx.Component:
                             ),
                         ),
                         rx.spacer(),
-                        bg="white",
+                        bg="#d4dbe5",
                         align_items="center",
                         width="27vw",
                         height="60vh",
@@ -99,7 +99,7 @@ def index() -> rx.Component:
                     ),
                     rx.spacer(),
                     rx.vstack(
-                        rx.heading("Livestream Heartrate", text_align="center", padding="5px", margin_top="15px", size="6"),
+                        rx.heading("Livestream Heartrate", text_align="center", padding="5px", margin_top="30px", size="6"),
                         rx.fragment(
                             rx.box(
                                 rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="3", text_align="center"),
@@ -116,7 +116,7 @@ def index() -> rx.Component:
                             width="100%",
                             height="35%"
                         ),
-                        bg="white",
+                        bg="#d4dbe5",
                         align_items="center",
                         width="27vw",
                         height="60vh",
@@ -148,7 +148,7 @@ def index() -> rx.Component:
                             ),
                         ),
                         rx.spacer(),
-                        bg="white",
+                        bg="#d4dbe5",
                         align_items="center",
                         width="27vw",
                         height="60vh",
@@ -162,7 +162,7 @@ def index() -> rx.Component:
                     ),
                     rx.spacer(),
                     rx.vstack(
-                        rx.heading("The Future", text_align="center", padding="5px", margin_top="15px", size="6"),
+                        rx.heading("The Future", text_align="center", padding="5px", margin_top="30px", size="6"),
                         rx.fragment(
                             rx.box(
                                 rx.text("At TruckrZzz, our vision extends beyond the trucking industry to encompass all drivers and vehicles. Recognizing that accidents caused by fatigue are not exclusive to commercial truck drivers, we're committed to expanding our application to serve all motorists. Our goal is to leverage the same innovative webcam and livestream heart rate monitoring features and adapt them for use in any type of vehicle. With our comprehensive approach to driver safety, we're dedicated to creating safer roads for everyone, regardless of the vehicle they operate.", size="3", text_align="center"),
@@ -179,7 +179,7 @@ def index() -> rx.Component:
                             width="100%",
                             height="35%"
                         ),
-                        bg="white",
+                        bg="#d4dbe5",
                         align_items="center",
                         width="27vw",
                         height="60vh",

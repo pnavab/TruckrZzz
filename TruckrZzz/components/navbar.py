@@ -43,17 +43,19 @@ class Navbar(rx.Component):
             # Github logo aligned to the right. We can replace this with something else later.
             rx.link(
                 rx.image(
-                    src="/github.svg",
-                    height="3em",
-                    padding="0.5em"
+                    src="/truckrzzz.png",
+                    height="4em",
+                    padding="0.2em"
                 ),
-                href="https://github.com/reflex-dev/reflex",
-                _hover={
-                    "bg": styles.accent_color,
-                },
+                href="https://github.com/pnavab/TruckrZzz",
                 box_shadow=styles.box_shadow,
                 bg="transparent",
-                border_radius=styles.border_radius
+                border_radius=styles.border_radius,
+                transition="transform 3s ease-in-out",
+                _hover={
+                    "bg": styles.accent_color,
+                    "transform": "scale(2)",
+                }
             ),
             width="100%",
             padding="1em",
