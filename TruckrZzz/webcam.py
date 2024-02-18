@@ -62,6 +62,16 @@ def webcam_page():
         rx.image(src=WebcamState.processed_frame),
         # rx.cond(WebcamState.drowsy, rx.html("<image src='/flashing.gif'>"
         #                                     ), rx.box(background_color="white")),
+        rx.vstack(
+            rx.image(src="/pngtree-iphone-14-png-image_6538682.png",
+                     width="100%", height="100%", z_index="-1"),
+            height="80vh",
+            width="50vw",
+            align_items="center"
+        ),
         rx.audio(url="/alarm_long.mp3", playing=WebcamState.drowsy),
 
+        # rx.image(src=WebcamState.processed_frame),
+        # rx.audio(url="/scream.mp3", playing=WebcamState.drowsy),
+        align_items="center"
     )
