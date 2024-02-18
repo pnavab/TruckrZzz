@@ -64,17 +64,7 @@ def index() -> rx.Component:
 
                     ),
                     rx.spacer(),
-<<<<<<< HEAD
                     rx.vstack(
-=======
-                    rx.box(
-                        rx.box(
-                            rx.image(src="/heart-rate-banner.png",width="100%",height="100%"),
-                            width="8em",
-                            height="25%"
-                        ),
-                        rx.spacer(),
->>>>>>> refs/remotes/origin/main
                         rx.heading("Livestream Heartrate",text_align="center",size="5",padding="5px"),
                         rx.fragment(
                             rx.box(
