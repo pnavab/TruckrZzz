@@ -86,6 +86,8 @@ class SleepDetector():
                 if self.drowsy:
                     cv2.putText(frame, "ALERT", (10, 30),
                                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        else:
+            frame = crop_center(frame)
         return frame
 
 
