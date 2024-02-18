@@ -29,7 +29,6 @@ def compute_eye_aspect_ratio(eye_coords):
 class SleepDetector():
     def __init__(self, visualize):
         self.warning_count = 0
-        self.cap = cv2.VideoCapture(0)
         self.drowsy = False
         self.visualize = visualize
 
