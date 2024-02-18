@@ -110,7 +110,30 @@ export function Nextlink_b1c6512ef7400da9cc7e870a3c2628fa () {
 
 export function Fragment_e49a0b0998fac00c2371b2d458f5f1eb () {
   const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_4ad30daad5f1a765af6da844ea466057 = useCallback((_e) => addEvents([Event("state.dashboard_state.submit_search", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_4ad30daad5f1a765af6da844ea466057}>
+  <LucideSearchIcon css={{"color": "var(--current-color)"}}/>
+</RadixThemesButton>
+  )
+}
+
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Fragment_35fa6cf6d0157d4e84bea1bf75e9316c () {
   const state__dashboard_state = useContext(StateContexts.state__dashboard_state)
+  const [addEvents, connectError] = useContext(EventLoopContext);
 
 
   return (
@@ -186,6 +209,16 @@ export function Fragment_e49a0b0998fac00c2371b2d458f5f1eb () {
   )
 }
 
+export function Textfield__input_a4ad24278cbaaa7d9f457ae5ff2f3928 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_change_ed82dc0e09406bf103315dbc0208cd7b = useCallback((_e0) => addEvents([Event("state.popover_state.set_device_id", {value:_e0.target.value})], (_e0), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesTextField.Input name={`device_id`} onChange={on_change_ed82dc0e09406bf103315dbc0208cd7b} placeholder={`Device ID`}/>
+  )
+}
+
 export function Button_72ce6a135682ba23b0237edfc05ed74b () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -199,6 +232,8 @@ export function Button_72ce6a135682ba23b0237edfc05ed74b () {
 }
 
 export function Root_73107f8974a03c21e2eae3fe979701e6 () {
+  const state__popover_state = useContext(StateContexts.state__popover_state)
+  const [addEvents, connectError] = useContext(EventLoopContext);
   const state__popover_state = useContext(StateContexts.state__popover_state)
   const [addEvents, connectError] = useContext(EventLoopContext);
   

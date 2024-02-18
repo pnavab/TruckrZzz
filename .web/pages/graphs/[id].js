@@ -13,6 +13,7 @@ import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
 const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
+const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
 const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 
 

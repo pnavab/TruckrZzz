@@ -2,13 +2,13 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment, useCallback, useContext } from "react"
+import { Fragment, useContext } from "react"
 import { EventLoopContext, StateContexts } from "/utils/context"
 import { Event, getBackendURL, isTrue } from "/utils/state"
-import { Button as RadixThemesButton, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
+import { Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
-import Script from "next/script"
+import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
 
@@ -175,9 +175,7 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
 </RadixThemesFlex>
-  <Button_aa37913fbfff9bafdfa6991b200da2fe/>
-  <Img_fe04a29112b85cd362a6fe8d7bab8bc1/>
-  <Fragment_3a7c8ba9118c7b795095bbb5575818b4/>
+  <Reactplayer_8d102028353de4560a40127830b14b27/>
 </RadixThemesFlex>
   <NextHead>
   <title>
