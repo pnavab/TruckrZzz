@@ -32,7 +32,6 @@ class GraphState(rx.State):
         with rx.session() as session:
             trucker = session.exec(select(Trucker).where(Trucker.device_id == self.user_id)).first()
             data = trucker.graph_data if trucker else []
-            print("got data, updating", data)
             self.update_graph_data(data)
     
     sleepiness_value = 4 # change the value to the real sleepiness value

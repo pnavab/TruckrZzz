@@ -70,10 +70,10 @@ class DashboardState(rx.State):
     # Add a trucker
     def add_trucker(self, name, device_id):
         with rx.session() as session:
-            new_trucker = Trucker(name=name, device_id=device_id)
+            new_trucker = Trucker(name=name, device_id=device_id, graph_data=[{"name": "Start", "awake": 9, "sleepy": None}])
             session.add(new_trucker)
             session.commit()
-            new_data = {"id": new_trucker.id, "name": new_trucker.name, "device_id": new_trucker.device_id, "graph_data": []}
+            new_data = {"id": new_trucker.id, "name": new_trucker.name, "device_id": new_trucker.device_id, "graph_data": [{"name": "Start", "awake": 9, "sleepy": None}]}
             updated_data = self.truckers_data + [new_data]
             self.update_truckers_data(updated_data)
             # self.get_truckers_list() # not live updating
