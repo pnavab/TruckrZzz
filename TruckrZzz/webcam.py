@@ -27,7 +27,6 @@ class WebcamState(rx.State):
                 frame = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
                 im_pil = Image.fromarray(frame)
                 async with self:
-                    print(detector.drowsy)
                     self.update_drowsy_state(detector.drowsy)
                     self.processed_frame = im_pil
                 yield  # Yield control to allow the frontend to update
@@ -45,10 +44,24 @@ class WebcamState(rx.State):
 #             await asyncio.sleep(0.5)
 
 
+class FlashingState(rx.State):
+    flashing_color: str = "red"
+
+    async def toggle_flashing(self):
+        while True:
+            self.set_flashing_color(
+                "red" if self.flashing_color == "white" else "white")
+            await asyncio.sleep(0.01)
+
+
 @rx.page(route="/webcam", title="webcam", on_load=WebcamState.capture_and_process_webcam)
 def webcam_page():
     return rx.vstack(
         navbar(),
         # rx.image(src=WebcamState.processed_frame),
-        rx.audio(url="/scream.mp3", playing=WebcamState.drowsy)
+        rx.audio(url="/alarm_long.mp3", playing=WebcamState.drowsy),
+        rx.cond(WebcamState.drowsy, rx.box(
+            "Flashing Box",
+            background_color=FlashingState.flashing_color
+        ), rx.box("hi", background_color="white"))
     )

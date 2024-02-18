@@ -5,9 +5,9 @@ import cv2
 import numpy as np
 import math
 
-EYE_ASPECT_RATIO_THRESH = 1.0
+EYE_ASPECT_RATIO_THRESH = 0.9
 
-CONSECUTIVE_WARNING_THRESH = 10
+CONSECUTIVE_WARNING_THRESH = 12
 
 DETECTOR = dlib.get_frontal_face_detector()
 PREDICTOR = dlib.shape_predictor(
@@ -57,7 +57,7 @@ class SleepDetector():
                 self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 2)
         else:
             self.warning_count = max(
-                self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
+                self.warning_count - math.ceil(9/(self.warning_count+1)), 0)
 
         self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
 
@@ -68,10 +68,8 @@ class SleepDetector():
             cv2.drawContours(
                 frame, [right_eye_outline], -1, (0, 0, 255), 1)
             if self.drowsy:
-                cv2.putText(frame, "****************ALERT!****************", (10, 30),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-                cv2.putText(frame, "****************ALERT!****************", (10, 325),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                cv2.putText(frame, "ALERT", (10, 30),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         return frame
 
 
