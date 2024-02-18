@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import math
 
-EYE_ASPECT_RATIO_THRESH = 0.8
+EYE_ASPECT_RATIO_THRESH = 0.75
 
 CONSECUTIVE_WARNING_THRESH = 12
 
@@ -26,6 +26,22 @@ def compute_eye_aspect_ratio(eye_coords):
     return ear
 
 
+def crop_center(image, percent_width=35):
+    # Calculate the new width based on the percentage
+    new_width = int(image.shape[1] * (percent_width / 100))
+
+    # Calculate the starting point for cropping
+    start_x = (image.shape[1] - new_width) // 2
+
+    # Calculate the ending point for cropping
+    end_x = start_x + new_width
+
+    # Crop the image
+    cropped_image = image[:, start_x:end_x]
+
+    return cropped_image
+
+
 class SleepDetector():
     def __init__(self, visualize):
         self.warning_count = 0
@@ -37,39 +53,41 @@ class SleepDetector():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Get the closest subject face
         subjects = DETECTOR(gray, 0)
-        if not subjects:
-            return frame
+        if subjects:
 
-        # Determine facial landmarks
-        shape = PREDICTOR(gray, subjects[0])
-        shape = face_utils.shape_to_np(shape)  # converting to NumPy Array
+            # Determine facial landmarks
+            shape = PREDICTOR(gray, subjects[0])
+            shape = face_utils.shape_to_np(shape)  # converting to NumPy Array
 
-        left_eye_coords = shape[L_START:L_END]
-        right_eye_coords = shape[R_START:R_END]
+            left_eye_coords = shape[L_START:L_END]
+            right_eye_coords = shape[R_START:R_END]
 
-        left_eye_aspect_ratio = compute_eye_aspect_ratio(
-            left_eye_coords)
-        right_eye_aspect_ratio = compute_eye_aspect_ratio(
-            right_eye_coords)
-        total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
-        if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
-            self.warning_count = min(
-                self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 1.5)
+            left_eye_aspect_ratio = compute_eye_aspect_ratio(
+                left_eye_coords)
+            right_eye_aspect_ratio = compute_eye_aspect_ratio(
+                right_eye_coords)
+            total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
+            if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
+                self.warning_count = min(
+                    self.warning_count + 1, 20)
+            else:
+                self.warning_count = max(
+                    self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
+
+            self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
+
+            if self.visualize:
+                left_eye_outline = cv2.convexHull(left_eye_coords)
+                right_eye_outline = cv2.convexHull(right_eye_coords)
+                cv2.drawContours(frame, [left_eye_outline], -1, (0, 0, 255), 1)
+                cv2.drawContours(
+                    frame, [right_eye_outline], -1, (0, 0, 255), 1)
+                frame = crop_center(frame)
+                if self.drowsy:
+                    cv2.putText(frame, "ALERT", (10, 30),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         else:
-            self.warning_count = max(
-                self.warning_count - math.ceil(9/(self.warning_count+1)), 0)
-
-        self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
-
-        if self.visualize:
-            left_eye_outline = cv2.convexHull(left_eye_coords)
-            right_eye_outline = cv2.convexHull(right_eye_coords)
-            cv2.drawContours(frame, [left_eye_outline], -1, (0, 0, 255), 1)
-            cv2.drawContours(
-                frame, [right_eye_outline], -1, (0, 0, 255), 1)
-            if self.drowsy:
-                cv2.putText(frame, "ALERT", (10, 30),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            frame = crop_center(frame)
         return frame
 
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /** @jsxImportSource @emotion/react */
 
 
@@ -12,38 +11,9 @@ import { Bar as RechartsBar, Brush as RechartsBrush, Legend as RechartsLegend, L
 import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
-const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
-const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
 const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
+const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
 
-
-export function Nextlink_4be1a1e6cdb3540cbde359ae92cd9d6a () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
-  )
-}
-
-export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
-
-  return (
-    <RechartsResponsiveContainer height={400} width={600}>
-  <RechartsBarChart data={state__graph_state.data} height={`100%`} width={`100%`}>
-  <RechartsBar dataKey={`sleepy`} fill={`#FF0000`} stroke={`#FF0000`}/>
-  <RechartsBar dataKey={`awake`} fill={`#8884d8`} stroke={`#8884d8`}/>
-  <RechartsBrush dataKey={`name`} height={30} stroke={`#8884d8`}/>
-  <RechartsXAxis dataKey={`name`}/>
-  <RechartsYAxis/>
-</RechartsBarChart>
-</RechartsResponsiveContainer>
-  )
-}
 
 export function Button_9597603d890ab5f8238396802458a589 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
@@ -54,6 +24,29 @@ export function Button_9597603d890ab5f8238396802458a589 () {
     <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
   {`Download Graph`}
 </RadixThemesButton>
+  )
+}
+
+export function Fragment_037fffe1114b22fe280102dd33270023 () {
+  const state__graph_state = useContext(StateContexts.state__graph_state)
+
+
+  return (
+    <Fragment>
+  {isTrue(state__graph_state.user_id) ? (
+  <Fragment>
+  <RadixThemesHeading>
+  {`Showing graph for user ${state__graph_state.user_id}`}
+</RadixThemesHeading>
+</Fragment>
+) : (
+  <Fragment>
+  <RadixThemesHeading>
+  {`Loading user id...`}
+</RadixThemesHeading>
+</Fragment>
+)}
+</Fragment>
   )
 }
 
@@ -86,13 +79,41 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Nextlink_ccc8bf5a01f6a9ecc8245e9a6987b9f4 () {
+export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
+  const state__graph_state = useContext(StateContexts.state__graph_state)
+
+
+  return (
+    <RechartsResponsiveContainer height={400} width={600}>
+  <RechartsBarChart data={state__graph_state.data} height={`100%`} width={`100%`}>
+  <RechartsBar dataKey={`sleepy`} fill={`#FF0000`} stroke={`#FF0000`}/>
+  <RechartsBar dataKey={`awake`} fill={`#8884d8`} stroke={`#8884d8`}/>
+  <RechartsBrush dataKey={`name`} height={30} stroke={`#8884d8`}/>
+  <RechartsXAxis dataKey={`name`}/>
+  <RechartsYAxis/>
+</RechartsBarChart>
+</RechartsResponsiveContainer>
+  )
+}
+
+export function Nextlink_04e84d65253ae2f5e88f7285b980b20d () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/webcam`} passHref={true}>
-  {`Webcam`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "color": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ffffff` : `black`, "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#3e5c76` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
+  )
+}
+
+export function Nextlink_7b60baf52fd3d49dbf1f60abe53e5691 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "color": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ffffff` : `black`, "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#3e5c76` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
 </NextLink>
   )
 }
@@ -115,47 +136,24 @@ export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
   )
 }
 
-export function Fragment_037fffe1114b22fe280102dd33270023 () {
-  const state__graph_state = useContext(StateContexts.state__graph_state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__graph_state.user_id) ? (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Showing graph for user ${state__graph_state.user_id}`}
-</RadixThemesHeading>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesHeading>
-  {`Loading user id...`}
-</RadixThemesHeading>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Nextlink_b1c6512ef7400da9cc7e870a3c2628fa () {
+export function Nextlink_e63d737be7802d6043c88ba5b017461d () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "color": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `#ffffff` : `black`, "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `#3e5c76` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/webcam`} passHref={true}>
+  {`Webcam`}
 </NextLink>
   )
 }
 
-export function Nextlink_ff641f88a18a9b37087217e798b1da66 () {
+export function Nextlink_3667c1e2fcc00ab30d42e8b29b5b05be () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "color": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ffffff` : `black`, "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#3e5c76` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
 </NextLink>
   )
 }
@@ -178,10 +176,10 @@ export default function Component() {
     <Fragment>
   <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
   <RadixThemesFlex align={`start`} css={{"alignItems": "center", "flexDirection": "column"}} gap={`2`}>
-  <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"width": "100%", "padding": "1em", "backgroundColor": "#f0ebd8", "height": "15%", "borderRadius": "0 0 10px 10px", "borderBottom": "1px solid #F4F3F6", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true}>
-  <NextLink css={{"&:hover": {"transition": "transform 0.2s ease-in-out", "textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
-  <RadixThemesHeading size={`7`}>
+  <NextLink css={{"transition": "transform 0.2s ease-in-out", "&:hover": {"textDecor": "none", "transform": "scale(1.1)"}}} href={`/`} passHref={true}>
+  <RadixThemesHeading css={{"color": "#1d2d44"}} size={`9`}>
   {`TruckrZzz`}
 </RadixThemesHeading>
 </NextLink>
@@ -189,19 +187,19 @@ export default function Component() {
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}} gap={`4`}>
   <RadixThemesLink asChild={true}>
-  <Nextlink_4be1a1e6cdb3540cbde359ae92cd9d6a/>
+  <Nextlink_04e84d65253ae2f5e88f7285b980b20d/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_b1c6512ef7400da9cc7e870a3c2628fa/>
+  <Nextlink_3667c1e2fcc00ab30d42e8b29b5b05be/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_ff641f88a18a9b37087217e798b1da66/>
+  <Nextlink_7b60baf52fd3d49dbf1f60abe53e5691/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_ccc8bf5a01f6a9ecc8245e9a6987b9f4/>
+  <Nextlink_e63d737be7802d6043c88ba5b017461d/>
 </RadixThemesLink>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
@@ -229,5 +227,3 @@ export default function Component() {
 </Fragment>
   )
 }
-=======
->>>>>>> refs/remotes/origin/main
