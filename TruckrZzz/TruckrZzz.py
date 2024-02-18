@@ -27,10 +27,10 @@ def index() -> rx.Component:
                 margin_top="5px"
             ), 
             rx.box(
-                rx.image(src="/BigTruck.png"),
+                rx.image(src="/truck2.gif",width="100vw",height="40vh"),
                 border_radius="15px",
-                width="fill",
-                height="fill"
+                # width="fill",
+                # height="fill"
             ),  
             rx.scroll_area(
                 rx.hstack(
@@ -62,7 +62,7 @@ def index() -> rx.Component:
                     rx.spacer(),
                     rx.box(
                         rx.box(
-                            rx.image(src="/webcam.png",width="100%",height="100%"),
+                            rx.image(src="/heart-rate-banner.png",width="100%",height="100%"),
                             width="8em",
                             height="25%"
                         ),
