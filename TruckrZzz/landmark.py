@@ -76,16 +76,16 @@ class SleepDetector():
 
             self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
 
-        if self.visualize:
-            left_eye_outline = cv2.convexHull(left_eye_coords)
-            right_eye_outline = cv2.convexHull(right_eye_coords)
-            cv2.drawContours(frame, [left_eye_outline], -1, (0, 0, 255), 1)
-            cv2.drawContours(
-                frame, [right_eye_outline], -1, (0, 0, 255), 1)
-            frame = crop_center(frame)
-            if self.drowsy:
-                cv2.putText(frame, "ALERT", (10, 30),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            if self.visualize:
+                left_eye_outline = cv2.convexHull(left_eye_coords)
+                right_eye_outline = cv2.convexHull(right_eye_coords)
+                cv2.drawContours(frame, [left_eye_outline], -1, (0, 0, 255), 1)
+                cv2.drawContours(
+                    frame, [right_eye_outline], -1, (0, 0, 255), 1)
+                frame = crop_center(frame)
+                if self.drowsy:
+                    cv2.putText(frame, "ALERT", (10, 30),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         return frame
 
 
