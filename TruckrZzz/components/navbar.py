@@ -34,7 +34,7 @@ class Navbar(rx.Component):
                 rx.spacer(width="20px"),
                 rx.link("Dashboard", href="/dashboard", padding="1em", border_radius="0.5em", color=rx.cond(self.is_selected("dashboard"), "#ffffff", "black"), background_color=rx.cond(self.is_selected("dashboard"), "#3e5c76", "transparent"), text_decoration=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"text_decoration": "underline"}),
                 rx.spacer(width="20px"),
-                rx.link("Graph", href="/graphs/6", padding="1em", border_radius="0.5em", color=rx.cond(self.is_selected("graphs"), "#ffffff", "black"), background_color=rx.cond(self.is_selected("graphs"), "#3e5c76", "transparent"), text_decoration=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"text_decoration": "underline"}),
+                rx.link("Graph", href="/dashboard", padding="1em", border_radius="0.5em", color=rx.cond(self.is_selected("graphs"), "#ffffff", "black"), background_color=rx.cond(self.is_selected("graphs"), "#3e5c76", "transparent"), text_decoration=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"text_decoration": "underline"}),
                 rx.spacer(width="20px"),
                 rx.link("Webcam", href="/webcam", padding="1em", border_radius="0.5em", color=rx.cond(self.is_selected("webcam"), "#ffffff", "black"), background_color=rx.cond(self.is_selected("webcam"), "#3e5c76", "transparent"), text_decoration=rx.cond(self.is_selected("webcam"), "underline", "none"), _hover={"text_decoration": "underline"}),
                 spacing="4"

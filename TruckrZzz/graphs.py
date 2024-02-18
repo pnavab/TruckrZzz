@@ -21,6 +21,7 @@ class GraphState(rx.State):
     def update_graph_data(self, new):
         self.data = new
 
+        
     running: bool = False
     
     def toggle_streaming(self):
@@ -40,7 +41,6 @@ class GraphState(rx.State):
     @rx.background
     async def get_api_data(self):
         while True:
-            await asyncio.sleep(3)  # Interval at which the API is polled
             if not self.running:
                 break
 
@@ -53,6 +53,7 @@ class GraphState(rx.State):
                     statement = select(HeartRate).where(HeartRate.device_id == self.user_id).order_by(HeartRate.created_at.desc())
                     result = session.exec(statement).first()
                     value = result.value
+                    heartrate = result.heartrate
 
                     if(value < self.sleepiness_value):
                         if self.data[-1]["awake"] is not None:
@@ -62,9 +63,9 @@ class GraphState(rx.State):
                     elif(value >= self.sleepiness_value):
                         if self.data[-1]["awake"] is None:
                             data_to_append["sleepy"] = value # will make the whole valley red
-                            # self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red
+                            self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red
                         else:
-                            data_to_append["sleepy"] = None
+                            data_to_append["sleepy"] = None # indent if the else above is not commented out
                         data_to_append["awake"] = value
 
                     trucker = session.exec(Trucker.select.where(Trucker.device_id == self.user_id)).first()
@@ -74,6 +75,7 @@ class GraphState(rx.State):
                     self.update_graph_data(combined)
                     session.commit()
 
+            await asyncio.sleep(3)  # Interval at which the API is polled
                 # -----old ------
                 # response = httpx.get('http://localhost:8001/sleepiness')
                 # data = response.json()
@@ -94,6 +96,10 @@ class GraphState(rx.State):
                 # self.data.append(data_to_append)
                 # self.graph_data.append({"name": timestamp, "value": data['value']})
 
+def get_name_by_id() -> str:
+    with rx.session() as session:
+        trucker = session.exec(select(Trucker).where(Trucker.device_id == GraphState.user_id)).first()
+        return trucker.name if trucker else "Trucker not found"
 
 @rx.page(route="/graphs/[id]", title="user graphs", on_load=GraphState.get_graph_data)
 def graphs() -> rx.Component:
@@ -101,7 +107,7 @@ def graphs() -> rx.Component:
         navbar(),
         rx.cond(
             GraphState.user_id,
-            rx.heading(f"Showing graph for user {GraphState.user_id}"),
+            rx.heading(f"Showing graph for user {GraphState.user_id}", size="8"),
             rx.heading("Loading user id...")
         ),
         rx.vstack(
@@ -145,13 +151,7 @@ def graphs() -> rx.Component:
                 width=600,
                 height=400,
             ),
-        ),
-        rx.button( # to download the current graph
-            "Download Graph",
-            on_click=rx.download(
-                url="/reflex_logo.png",
-                filename="different_name_logo.png",
-            ),
+            align_items="center"
         ),
         align_items="center"
     )

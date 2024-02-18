@@ -110,31 +110,31 @@ class DashboardState(rx.State):
 from typing import Any
 def display_trucker(trucker):
     path = f"/graphs/{trucker.device_id}"
-    last_val = rx.cond(trucker.graph_data, trucker.graph_data.to(list[dict[str, Any]])[-1]["awake"], 5)
+    last_val = rx.cond(trucker.graph_data.to(list[dict[str, Any]])[-1]["awake"].to(int) >= 4, trucker.graph_data.to(list[dict[str, Any]])[-1]["awake"], trucker.graph_data.to(list[dict[str, Any]])[-1]["sleepy"])
     # last_val = 8
     return rx.hstack(
         rx.vstack(
             rx.link(
-            rx.box(
-                rx.cond(
-                    last_val,
-                    rx.text(f"ID: {trucker.id}, Name: {trucker.name}, Device ID: {trucker.device_id}, Last Sleepiness Value: {last_val}"),
-                    rx.text("Loading data...")
+                rx.box(
+                    rx.cond(
+                        last_val,
+                        rx.text(f"ID: {trucker.id}, Name: {trucker.name}, Device ID: {trucker.device_id}, Last Sleepiness Value: {last_val}"),
+                        rx.text("Loading data...")
+                    ),
+                    padding="1em",
+                    border="1px solid #DDD",
+                    border_radius="10px",
+                    shadow="0 2px 4px rgba(0,0,0,0.1)",
+                    width="100%",
+                    background_color="#1d2d44",
+                    margin_y="0.5em",
+                    display="inline-block",
+                    transition="transform 0.15s ease-in-out",
+                    _hover={"background_color": "#3e5c76", "transform": "scale(1.1)"},
+                    # on_click=rx.redirect(path), # Error: x Expected unicode escape i have to go to .web/pages/dashboard and remove the unicode escapes
                 ),
-                padding="1em",
-                border="1px solid #DDD",
-                border_radius="10px",
-                shadow="0 2px 4px rgba(0,0,0,0.1)",
-                width="100%",
-                background_color="#1d2d44",
-                margin_y="0.5em",
-                display="inline-block",
-                transition="transform 0.15s ease-in-out",
-                _hover={"background_color": "#3e5c76", "transform": "scale(1.1)"},
-                # on_click=rx.redirect(path), # Error: x Expected unicode escape i have to go to .web/pages/dashboard and remove the unicode escapes
-            ),
-            href=path,
-            color = "white"
+                href=path,
+                color = "white"
             ),
             align_items="left"
         ),
@@ -171,7 +171,7 @@ def dashboard() -> rx.Component:
     return rx.vstack(
         navbar(),
         rx.spacer(),
-        rx.heading("Dashboard",font_size="3em",color="#1d2d44"),
+        rx.heading("Dashboard", size="8", color="#1d2d44"),
         rx.spacer(),
         submit_popover(),
         search_bar(),

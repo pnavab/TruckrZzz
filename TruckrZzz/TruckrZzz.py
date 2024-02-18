@@ -18,6 +18,7 @@ class HeartRate(rx.Model, table=True):
     id: int = Field(default=None, primary_key=True)
     value: int
     device_id: str
+    heartrate: int
     created_at: datetime.datetime = Field(
         default=None,
         sa_column=Column(
@@ -240,7 +241,7 @@ async def api_test(request_body: Request):
     else:
         output = 1
     with rx.session() as session:
-        session.add(HeartRate(value=output, device_id=device_id))
+        session.add(HeartRate(value=output, device_id=device_id, heartrate=val))
         session.commit()
     return {"processed": "true", "output": output}
 
