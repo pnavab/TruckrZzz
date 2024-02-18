@@ -60,10 +60,11 @@ class DashboardState(rx.State):
     def delete_trucker_by_id(self, id):
         with rx.session() as session:
             trucker = session.exec(select(Trucker).where(Trucker.id == id)).first()
+            truckers = session.exec(select(Trucker)).all()
             if trucker:
                 session.delete(trucker)
                 session.commit()
-                updated_data = [trucker for trucker in self.truckers_data if trucker.id != id]
+                updated_data = [trucker for trucker in truckers if trucker.id != id]
                 self.update_truckers_data(updated_data)
     
     # Add a trucker
