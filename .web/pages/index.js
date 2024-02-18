@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /** @jsxImportSource @emotion/react */
 
 
@@ -233,3 +234,5 @@ export default function Component() {
 </Fragment>
   )
 }
+=======
+>>>>>>> refs/remotes/origin/main
