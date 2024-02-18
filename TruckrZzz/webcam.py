@@ -49,6 +49,13 @@ class WebcamState(rx.State):
 def webcam_page():
     return rx.vstack(
         navbar(),
+        rx.vstack(
+            rx.image(src="/pngtree-iphone-14-png-image_6538682.png",width="100%",height="100%",z_index="-1"),
+            height="80vh",
+            width="50vw",
+            align_items="center"
+        ),
         # rx.image(src=WebcamState.processed_frame),
-        rx.audio(url="/scream.mp3", playing=WebcamState.drowsy)
+        rx.audio(url="/scream.mp3", playing=WebcamState.drowsy),
+        align_items="center"
     )
