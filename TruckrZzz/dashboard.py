@@ -12,13 +12,6 @@ class Trucker(rx.Model, table=True): # run reflex db init
     graph_data: list = Field(sa_column=Column(JSON))
 Trucker.create_all()
 with rx.session() as session:
-    session.add(Trucker(name="joe", device_id="123123cf", graph_data=[
-        {"name": "Start", "awake": 9, "sleepy": None},
-        {"name": "Start", "awake": 6, "sleepy": 6},
-        {"name": "Start", "awake": 5, "sleepy": None},
-    ]))
-    session.commit()
-with rx.session() as session:
     session.add(Trucker(name="bob", device_id="dsf98723", graph_data=[
         {"name": "Start", "awake": 7, "sleepy": None},
         {"name": "Start", "awake": 9, "sleepy": 9},
@@ -96,8 +89,9 @@ class DashboardState(rx.State):
         if self.search_query == "":
             self.update_filtered_data([])
         else:
+            truckers = session.exec(select(Trucker)).all()
             updated_data = [
-                trucker for trucker in self.truckers_data
+                trucker for trucker in truckers
                 if self.search_query.lower() in trucker.name.lower()
                 or self.search_query.lower() in trucker.device_id.lower()
             ]

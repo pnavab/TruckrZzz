@@ -40,7 +40,7 @@ class GraphState(rx.State):
     @rx.background
     async def get_api_data(self):
         while True:
-            await asyncio.sleep(1)  # Interval at which the API is polled
+            await asyncio.sleep(3)  # Interval at which the API is polled
             if not self.running:
                 break
 
