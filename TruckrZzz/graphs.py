@@ -4,8 +4,11 @@ import asyncio
 import httpx
 import datetime
 import reflex as rx
-
+from sqlmodel import Field, SQLModel, select, JSON
+from TruckrZzz.dashboard import Trucker
 from TruckrZzz.components.navbar import navbar
+from TruckrZzz.TruckrZzz import HeartRate
+from typing import Any
 
 
 class GraphState(rx.State):
@@ -13,31 +16,27 @@ class GraphState(rx.State):
     def user_id(self) -> str:
         return self.router.page.params.get('id')
     
-    # def get_name_from_id(self):
-    #     name = DashboardState.get_name_by_id(self.user_id)
-    #     return name
-    
+    data: list[dict[str, Any]] = []
+
+    def update_graph_data(self, new):
+        self.data = new
+
     running: bool = False
-    graph_data = [
-        {"name": "start", "value": 9},
-    ]
-
-    data: list = [
-        {"name": "Start", "awake": 9, "sleepy": None},
-        {"name": "Start", "awake": 6, "sleepy": 6},
-        {"name": "Start", "awake": 5, "sleepy": None},
-    ]
-
-    # def get_last_value(self):
-    last_value = graph_data[-1]["value"]
-      # return last_value
     
     def toggle_streaming(self):
         self.running = not self.running
         if self.running:
             return GraphState.get_api_data
+        
+    def get_graph_data(self):
+        with rx.session() as session:
+            trucker = session.exec(select(Trucker).where(Trucker.device_id == self.user_id)).first()
+            data = trucker.graph_data if trucker else []
+            print("got data, updating", data)
+            self.update_graph_data(data)
     
     sleepiness_value = 4 # change the value to the real sleepiness value
+
     #httpx is required in order to make async calls with reflex
     @rx.background
     async def get_api_data(self):
@@ -49,28 +48,55 @@ class GraphState(rx.State):
             async with self:
                 time = datetime.datetime.now()
                 timestamp = f"{time.hour}: {time.minute}.{time.second}"
-
-                response = httpx.get('http://localhost:8001/sleepiness')
-                data = response.json()
-                value = data['value']
                 data_to_append = {"name": timestamp}
-                if(value < self.sleepiness_value):
-                    if self.data[-1]["awake"] is not None:
-                        self.data[-1]["sleepy"] = self.data[-1]["awake"]
-                    data_to_append["awake"] = None
-                    data_to_append["sleepy"] = value
-                elif(value >= self.sleepiness_value):
-                    if self.data[-1]["awake"] is None:
-                        data_to_append["sleepy"] = value # will make the whole valley red
-                        # self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red
-                    else:
-                        data_to_append["sleepy"] = None
-                    data_to_append["awake"] = value
-                self.data.append(data_to_append)
+
+                with rx.session() as session:
+                    statement = select(HeartRate).where(HeartRate.device_id == self.user_id).order_by(HeartRate.created_at.desc())
+                    result = session.exec(statement).first()
+                    value = result.value
+
+                    if(value < self.sleepiness_value):
+                        if self.data[-1]["awake"] is not None:
+                            self.data[-1]["sleepy"] = self.data[-1]["awake"]
+                        data_to_append["awake"] = None
+                        data_to_append["sleepy"] = value
+                    elif(value >= self.sleepiness_value):
+                        if self.data[-1]["awake"] is None:
+                            data_to_append["sleepy"] = value # will make the whole valley red
+                            # self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red
+                        else:
+                            data_to_append["sleepy"] = None
+                        data_to_append["awake"] = value
+
+                    trucker = session.exec(Trucker.select.where(Trucker.device_id == self.user_id)).first()
+                    combined = trucker.graph_data + [data_to_append]
+                    trucker.graph_data = combined
+                    session.add(trucker)
+                    self.update_graph_data(combined)
+                    session.commit()
+
+                # -----old ------
+                # response = httpx.get('http://localhost:8001/sleepiness')
+                # data = response.json()
+                # value = data['value']
+                # data_to_append = {"name": timestamp}
+                # if(value < self.sleepiness_value):
+                #     if self.data[-1]["awake"] is not None:
+                #         self.data[-1]["sleepy"] = self.data[-1]["awake"]
+                #     data_to_append["awake"] = None
+                #     data_to_append["sleepy"] = value
+                # elif(value >= self.sleepiness_value):
+                #     if self.data[-1]["awake"] is None:
+                #         data_to_append["sleepy"] = value # will make the whole valley red
+                #         # self.data[-1]["awake"] = self.data[-1]["sleepy"] # makes only the downward slope red
+                #     else:
+                #         data_to_append["sleepy"] = None
+                #     data_to_append["awake"] = value
+                # self.data.append(data_to_append)
                 # self.graph_data.append({"name": timestamp, "value": data['value']})
 
 
-@rx.page(route="/graphs/[id]", title="user graphs")
+@rx.page(route="/graphs/[id]", title="user graphs", on_load=GraphState.get_graph_data)
 def graphs() -> rx.Component:
     return rx.vstack(
         navbar(),
