@@ -53,29 +53,28 @@ class SleepDetector():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Get the closest subject face
         subjects = DETECTOR(gray, 0)
-        if not subjects:
-            return frame
+        if subjects:
 
-        # Determine facial landmarks
-        shape = PREDICTOR(gray, subjects[0])
-        shape = face_utils.shape_to_np(shape)  # converting to NumPy Array
+            # Determine facial landmarks
+            shape = PREDICTOR(gray, subjects[0])
+            shape = face_utils.shape_to_np(shape)  # converting to NumPy Array
 
-        left_eye_coords = shape[L_START:L_END]
-        right_eye_coords = shape[R_START:R_END]
+            left_eye_coords = shape[L_START:L_END]
+            right_eye_coords = shape[R_START:R_END]
 
-        left_eye_aspect_ratio = compute_eye_aspect_ratio(
-            left_eye_coords)
-        right_eye_aspect_ratio = compute_eye_aspect_ratio(
-            right_eye_coords)
-        total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
-        if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
-            self.warning_count = min(
-                self.warning_count + 1, 20)
-        else:
-            self.warning_count = max(
-                self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
+            left_eye_aspect_ratio = compute_eye_aspect_ratio(
+                left_eye_coords)
+            right_eye_aspect_ratio = compute_eye_aspect_ratio(
+                right_eye_coords)
+            total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
+            if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
+                self.warning_count = min(
+                    self.warning_count + 1, 20)
+            else:
+                self.warning_count = max(
+                    self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
 
-        self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
+            self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
 
         if self.visualize:
             left_eye_outline = cv2.convexHull(left_eye_coords)
