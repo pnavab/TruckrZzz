@@ -1,7 +1,6 @@
 """The dashboard page."""
 from TruckrZzz import styles
 from TruckrZzz.components.navbar import navbar, NavbarState
-from TruckrZzz.graphs import GraphState
 from sqlmodel import Field, SQLModel, select, JSON
 from sqlalchemy import Column
 import reflex as rx
@@ -42,18 +41,12 @@ class DashboardState(rx.State):
         with rx.session() as session:
             trucker = session.exec(select(Trucker).where(Trucker.id == trucker_id)).first()
             return trucker.name if trucker else "Trucker not found"
-        
-    # Fetch a trucker's graph by id
-    def get_graph_data_by_id(self, trucker_id: int) -> str:
-        with rx.session() as session:
-            trucker = session.exec(select(Trucker).where(Trucker.id == trucker_id)).first()
-            return trucker.graph_data if trucker else "Trucker not found"
-        
-    def get_last_sleepiness_value_by_id(self, trucker_id):
+                
+    def get_last_sleepiness_value_by_id(self, trucker_id, sleepiness_value):
         with rx.session() as session:
             trucker = session.exec(select(Trucker).where(Trucker.id == trucker_id)).first()
             last_val = trucker.graph_data[-1]
-            if last_val["sleepy"] is not None and last_val["sleepy"] < GraphState.sleepiness_value:
+            if last_val["sleepy"] is not None and last_val["sleepy"] < sleepiness_value:
                 last_val = last_val["sleepy"]
             else:
                 last_val = last_val["awake"]
