@@ -30,11 +30,13 @@ class Navbar(rx.Component):
             rx.spacer(),
             # Centered text links "home", "dash", "graph".
             rx.center(
-                rx.link("Home", href="/", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected(""), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
+                rx.link("Home", href="/", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected(""), "#ADD8E6", "transparent"), text_decoration=rx.cond(self.is_selected(""), "underline", "none"), _hover={"text_decoration": "underline"}),
                 rx.spacer(width="20px"),
-                rx.link("Dashboard", href="/dashboard", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("dashboard"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
+                rx.link("Dashboard", href="/dashboard", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("dashboard"), "#ADD8E6", "transparent"), text_decoration=rx.cond(self.is_selected("dashboard"), "underline", "none"), _hover={"text_decoration": "underline"}),
                 rx.spacer(width="20px"),
-                rx.link("Graph", href="/graphs/6", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("graphs"), "#ADD8E6", "transparent"), text_decor=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"transform": "scale(1.1)", "text_decor": "underline"}),
+                rx.link("Graph", href="/graphs/6", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("graphs"), "#ADD8E6", "transparent"), text_decoration=rx.cond(self.is_selected("graphs"), "underline", "none"), _hover={"text_decoration": "underline"}),
+                rx.spacer(width="20px"),
+                rx.link("Webcam", href="/webcam", padding="1em", border_radius="0.5em", background_color=rx.cond(self.is_selected("webcam"), "#ADD8E6", "transparent"), text_decoration=rx.cond(self.is_selected("webcam"), "underline", "none"), _hover={"text_decoration": "underline"}),
                 spacing="4"
             ),
             rx.spacer(),

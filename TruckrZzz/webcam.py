@@ -56,7 +56,7 @@ def sound_effect_demo():
             button_sfx.load()
             button_sfx.play()
             """
-        ),
+        )
     )
 
 def sound_stop():

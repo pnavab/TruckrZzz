@@ -11,27 +11,16 @@ import { Bar as RechartsBar, Brush as RechartsBrush, Legend as RechartsLegend, L
 import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
-const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
+const RechartsLineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 
 
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+export function Nextlink_4be1a1e6cdb3540cbde359ae92cd9d6a () {
   const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
 
   return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
-  )
-}
-
-export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === (""))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/`} passHref={true}>
   {`Home`}
 </NextLink>
   )
@@ -51,6 +40,18 @@ export function Responsivecontainer_9ab6f46295c1efadef663d4d94249fce () {
   <RechartsYAxis/>
 </RechartsBarChart>
 </RechartsResponsiveContainer>
+  )
+}
+
+export function Button_9597603d890ab5f8238396802458a589 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_7cb754e9fe2cc1791459bafa2f353962 = useCallback((_e) => addEvents([Event("_download", {url:`/reflex_logo.png`,filename:`different_name_logo.png`})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
+  {`Download Graph`}
+</RadixThemesButton>
   )
 }
 
@@ -83,6 +84,17 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
+export function Nextlink_ccc8bf5a01f6a9ecc8245e9a6987b9f4 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("webcam"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/webcam`} passHref={true}>
+  {`Webcam`}
+</NextLink>
+  )
+}
+
 export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
   const state__graph_state = useContext(StateContexts.state__graph_state)
 
@@ -98,17 +110,6 @@ export function Responsivecontainer_9e2c814f5ba25cc7e0d1a2aae211b33a () {
   <RechartsLegend/>
 </RechartsLineChart>
 </RechartsResponsiveContainer>
-  )
-}
-
-export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
-  {`Graph`}
-</NextLink>
   )
 }
 
@@ -135,15 +136,25 @@ export function Fragment_037fffe1114b22fe280102dd33270023 () {
   )
 }
 
-export function Button_9597603d890ab5f8238396802458a589 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Nextlink_b1c6512ef7400da9cc7e870a3c2628fa () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
 
-  const on_click_7cb754e9fe2cc1791459bafa2f353962 = useCallback((_e) => addEvents([Event("_download", {url:`/reflex_logo.png`,filename:`different_name_logo.png`})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesButton onClick={on_click_7cb754e9fe2cc1791459bafa2f353962}>
-  {`Download Graph`}
-</RadixThemesButton>
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Nextlink_ff641f88a18a9b37087217e798b1da66 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecoration": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"textDecoration": "underline"}}} href={`/graphs/6`} passHref={true}>
+  {`Graph`}
+</NextLink>
   )
 }
 
@@ -176,15 +187,19 @@ export default function Component() {
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}} gap={`4`}>
   <RadixThemesLink asChild={true}>
-  <Nextlink_c25d099bee075c5dafd83024f1c90dc6/>
+  <Nextlink_4be1a1e6cdb3540cbde359ae92cd9d6a/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_eada45837dd5269791f8cd2d6c85f84e/>
+  <Nextlink_b1c6512ef7400da9cc7e870a3c2628fa/>
 </RadixThemesLink>
   <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesLink asChild={true}>
-  <Nextlink_b0ee6904d0980f25e02c4adbcbfdba05/>
+  <Nextlink_ff641f88a18a9b37087217e798b1da66/>
+</RadixThemesLink>
+  <RadixThemesFlex css={{"width": "20px", "flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
+  <RadixThemesLink asChild={true}>
+  <Nextlink_ccc8bf5a01f6a9ecc8245e9a6987b9f4/>
 </RadixThemesLink>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>

@@ -7,6 +7,7 @@ from TruckrZzz.graphs import *
 from TruckrZzz.dashboard import *
 from TruckrZzz.components.footer import footer
 from TruckrZzz.webcam import *
+from fastapi import FastAPI, Request
 import reflex as rx
 
 docs_url = "https://reflex.dev/docs/getting-started/introduction"
@@ -37,8 +38,8 @@ def index() -> rx.Component:
                     rx.box(
                         rx.box(
                             rx.image(src="/webcam.png",width="100%",height="100%"),
-                            width="8em",
-                            height="25%"
+                            width="100%",
+                            height="40%"
                         ),
                         rx.heading("Webcam Integration", text_align="center",size="5",padding="5px"),
                         rx.fragment(
@@ -51,7 +52,7 @@ def index() -> rx.Component:
                             ),
                         ),
                         bg="white",
-                        width="8em",
+                        width="27vw",
                         height="60vh",
                         margin_bottom="20px",
                         margin_top="20px",
@@ -60,13 +61,7 @@ def index() -> rx.Component:
                         
                     ),
                     rx.spacer(),
-                    rx.box(
-                        rx.box(
-                            rx.image(src="/webcam.png",width="100%",height="100%"),
-                            width="8em",
-                            height="25%"
-                        ),
-                        rx.spacer(),
+                    rx.vstack(
                         rx.heading("Livestream Heartrate",text_align="center",size="5",padding="5px"),
                         rx.fragment(
                             rx.box(
@@ -77,19 +72,28 @@ def index() -> rx.Component:
                                 margin_right="5px"
                             ),
                         ),
+                        rx.spacer(),
+                        rx.box(
+                            rx.image(src="/webcam.png",width="100%",height="100%"),
+                            width="100%",
+                            height="40%",
+                            bottom="0"
+                        ),
                         bg="white",
-                        width="8em",
+                        width="27vw",
                         height="60vh",
                         margin_bottom="20px",
                         margin_top="20px",
                         margin_right="20px",
                         margin_left="20px",
+                        align_items="center",
+                        _hover={"transform": "rotate(0)"}
                     ),
                     rx.spacer(),
                     rx.box(
                         rx.box(
                             rx.image(src="/webcam.png",width="100%",height="100%"),
-                            width="8em",
+                            width="100%",
                             height="25%"
                         ),
                         rx.heading("Additional Feature",text_align="center",size="5",padding="5px"),
@@ -103,7 +107,7 @@ def index() -> rx.Component:
                             ),
                         ),
                         bg="white",
-                        width="8em",
+                        width="27vw",
                         height="60vh",
                         margin_bottom="20px",
                         margin_top="20px",
@@ -114,7 +118,7 @@ def index() -> rx.Component:
                     rx.box(
                         rx.box(
                             rx.image(src="/webcam.png",width="100%",height="100%"),
-                            width="8em",
+                            width="100%",
                             height="25%"
                         ),
                         rx.heading("Additional Feature",text_align="center",size="5",padding="5px"),
@@ -128,7 +132,7 @@ def index() -> rx.Component:
                             ),
                         ),
                         bg="white",
-                        width="8em",
+                        width="27vw",
                         height="60vh",
                         margin_bottom="20px",
                         margin_top="20px",
@@ -157,4 +161,15 @@ def index() -> rx.Component:
 
 
 app = rx.App()
+app.add_cors()
 app.add_page(index)
+
+# @app.api.post
+async def api_test(request_body: Request):
+    json_body = await request_body.json()
+    return {"processed": json_body}
+
+
+
+# app.api.add_api_route("/", api_test)
+app.api.add_api_route("/", api_test, methods=["POST"])
