@@ -119,31 +119,42 @@ def display_trucker(trucker):
     last_val = rx.cond(trucker.graph_data, trucker.graph_data.to(list[dict[str, Any]])[-1]["awake"], 5)
     # last_val = 8
     return rx.hstack(
-        rx.link(
-          rx.box(
-              rx.cond(
-                  last_val,
-                  rx.text(f"ID: {trucker.id}, Name: {trucker.name}, Device ID: {trucker.device_id}, Last Sleepiness Value: {last_val}"),
-                  rx.text("Loading data...")
-              ),
-              padding="1em",
-              border="1px solid #DDD",
-              border_radius="10px",
-              shadow="0 2px 4px rgba(0,0,0,0.1)",
-              width="100%",
-              background_color="#93d3d9",
-              margin_y="0.5em",
-              display="inline-block",
-              transition="transform 0.15s ease-in-out",
-              _hover={"background_color": "#b69bcc", "transform": "scale(1.1)"},
-              # on_click=rx.redirect(path), # Error: x Expected unicode escape i have to go to .web/pages/dashboard and remove the unicode escapes
-          ),
-          href=path
+        rx.vstack(
+            rx.link(
+            rx.box(
+                rx.cond(
+                    last_val,
+                    rx.text(f"ID: {trucker.id}, Name: {trucker.name}, Device ID: {trucker.device_id}, Last Sleepiness Value: {last_val}"),
+                    rx.text("Loading data...")
+                ),
+                padding="1em",
+                border="1px solid #DDD",
+                border_radius="10px",
+                shadow="0 2px 4px rgba(0,0,0,0.1)",
+                width="100%",
+                background_color="#1d2d44",
+                margin_y="0.5em",
+                display="inline-block",
+                transition="transform 0.15s ease-in-out",
+                _hover={"background_color": "#3e5c76", "transform": "scale(1.1)"},
+                # on_click=rx.redirect(path), # Error: x Expected unicode escape i have to go to .web/pages/dashboard and remove the unicode escapes
+            ),
+            href=path,
+            color = "white"
+            ),
+            align_items="left"
         ),
-        rx.button(
-            rx.icon(tag="delete"),
-            on_click=DashboardState.delete_trucker_by_id(trucker.id)
-        )
+        rx.spacer(),
+        rx.vstack(
+            rx.button(
+                rx.icon(tag="delete"),
+                
+                color = "white",
+                on_click=DashboardState.delete_trucker_by_id(trucker.id)
+            ),
+            align_items="center",
+        ),
+        align_items="center"
     )
 
 def search_bar():
@@ -156,15 +167,18 @@ def search_bar():
         ),
         rx.button(
             rx.icon(tag="search"),
-            on_click=DashboardState.submit_search
-        )
+            on_click=DashboardState.submit_search,
+        ),
+        align_items="center",
     )
 
 @rx.page(route="/dashboard", title="dashboard", on_load=DashboardState.get_truckers_list)
 def dashboard() -> rx.Component:
     return rx.vstack(
         navbar(),
-        rx.heading("Dashboard"),
+        rx.spacer(),
+        rx.heading("Dashboard",font_size="3em",color="#1d2d44"),
+        rx.spacer(),
         submit_popover(),
         search_bar(),
         rx.cond(
