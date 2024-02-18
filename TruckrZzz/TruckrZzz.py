@@ -17,15 +17,26 @@ filename = f"{config.app_name}/{config.app_name}.py"
 class State(rx.State):
     """The app state."""
 
+def truck_sound_effect():
+    return rx.hstack(
+        rx.script(
+            """
+            function playAudio() { var audio = new Audio("/truck-honk.mp3"); audio.play() };
+            """,
+            on_ready=rx.call_script("playAudio()")
+        ),
+    )
 
+@rx.page(route="/", title="home")
 def index() -> rx.Component:
     return rx.vstack(
+        rx.audio(url="/truck-honk.mp3", playing=True),
         navbar(),
         rx.vstack(
             rx.box(
                 rx.heading(
-                    rx.text("Saving Lives One ",margin_bottom="12px"),
-                    rx.text("ـﮩ٨ـHEARTBEATـﮩ٨ـ", color="red", margin_bottom="12px", font_size="1.2em"),
+                    rx.text("Saving Lives One ",margin_bottom="20px"),
+                    rx.text("ـﮩ٨ـHEARTBEATـﮩ٨ـ", color="red", margin_bottom="20px", font_size="1.2em"),
                     rx.text("at a Time"),
                     font_size="1.5em",
                     text_align="center",
@@ -50,7 +61,7 @@ def index() -> rx.Component:
                         rx.heading("Webcam Integration",text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project incorporates facial recognition and landmarking technology leveraging the webcam to monitor the sleepiness level of truck drivers in real time. By analyzing facial cues and patterns, the system assesses signs of drowsiness, alerting the driver and playing a warning sound to wake the driver up. This innovative feature not only prioritizes the well-being of drivers but also enhances overall fleet management efficiency.", size="2", text_align="center"),
+                                rx.text("Our project incorporates facial recognition and landmarking technology leveraging the webcam to monitor the sleepiness level of truck drivers in real time. By analyzing facial cues and patterns, the system assesses signs of drowsiness, alerting the driver and playing a warning sound to wake the driver up. This innovative feature not only prioritizes the well-being of drivers but also enhances overall fleet management efficiency.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -76,7 +87,7 @@ def index() -> rx.Component:
                         rx.heading("Livestream Heartrate", text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="2", text_align="center"),
+                                rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -113,7 +124,7 @@ def index() -> rx.Component:
                         rx.heading("Webcam Integration",text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project incorporates facial recognition and landmarking technology leveraging the webcam to monitor the sleepiness level of truck drivers in real time. By analyzing facial cues and patterns, the system assesses signs of drowsiness, alerting the driver and playing a warning sound to wake the driver up. This innovative feature not only prioritizes the well-being of drivers but also enhances overall fleet management efficiency.", size="2", text_align="center"),
+                                rx.text("Our project incorporates facial recognition and landmarking technology leveraging the webcam to monitor the sleepiness level of truck drivers in real time. By analyzing facial cues and patterns, the system assesses signs of drowsiness, alerting the driver and playing a warning sound to wake the driver up. This innovative feature not only prioritizes the well-being of drivers but also enhances overall fleet management efficiency.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -139,7 +150,7 @@ def index() -> rx.Component:
                         rx.heading("Livestream Heartrate", text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="2", text_align="center"),
+                                rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -188,7 +199,6 @@ def index() -> rx.Component:
 
 app = rx.App()
 app.add_cors()
-app.add_page(index)
 
 # @app.api.post
 async def api_test(request_body: Request):

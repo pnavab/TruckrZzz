@@ -191,7 +191,6 @@ def dashboard() -> rx.Component:
             ),
         ),
         align_items="center",
-        width="60%"
     )
 
 class PopoverState(rx.State):
