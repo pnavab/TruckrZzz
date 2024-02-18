@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import math
 
-EYE_ASPECT_RATIO_THRESH = 0.9
+EYE_ASPECT_RATIO_THRESH = 0.8
 
 CONSECUTIVE_WARNING_THRESH = 12
 
@@ -54,7 +54,7 @@ class SleepDetector():
         total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
         if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
             self.warning_count = min(
-                self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 2)
+                self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 1.5)
         else:
             self.warning_count = max(
                 self.warning_count - math.ceil(9/(self.warning_count+1)), 0)
