@@ -1,67 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment, useCallback, useContext } from "react"
+import { Fragment, useContext } from "react"
 import { EventLoopContext, StateContexts } from "/utils/context"
 import { Event, getBackendURL, isTrue } from "/utils/state"
-import { Button as RadixThemesButton, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
+import { Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
-import Script from "next/script"
+import dynamic from "next/dynamic"
 import NextHead from "next/head"
 
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
-
-export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
-  {`Dashboard`}
-</NextLink>
-  )
-}
-
-export function Fragment_3a7c8ba9118c7b795095bbb5575818b4 () {
-  const state__webcam_state = useContext(StateContexts.state__webcam_state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__webcam_state.drowsy) ? (
-  <Fragment>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
-  <Script strategy={`afterInteractive`}>
-  {`
-            var button_sfx = new Audio("/scream.mp3")
-            button_sfx.load()
-            button_sfx.play()
-            `}
-</Script>
-</RadixThemesFlex>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesText as={`p`}>
-  {`awake.....`}
-</RadixThemesText>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
-  const state__navbar_state = useContext(StateContexts.state__navbar_state)
-
-
-  return (
-    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
-  {`Home`}
-</NextLink>
-  )
-}
 
 export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
@@ -92,12 +42,34 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Img_fe04a29112b85cd362a6fe8d7bab8bc1 () {
+export function Reactplayer_8d102028353de4560a40127830b14b27 () {
   const state__webcam_state = useContext(StateContexts.state__webcam_state)
 
 
   return (
-    <img src={state__webcam_state.processed_frame}/>
+    <ReactPlayer controls={true} playing={state__webcam_state.drowsy} url={`/scream.mp3`}/>
+  )
+}
+
+export function Nextlink_eada45837dd5269791f8cd2d6c85f84e () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/dashboard`} passHref={true}>
+  {`Dashboard`}
+</NextLink>
+  )
+}
+
+export function Nextlink_c25d099bee075c5dafd83024f1c90dc6 () {
+  const state__navbar_state = useContext(StateContexts.state__navbar_state)
+
+
+  return (
+    <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === (""))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("dashboard"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/`} passHref={true}>
+  {`Home`}
+</NextLink>
   )
 }
 
@@ -109,18 +81,6 @@ export function Nextlink_b0ee6904d0980f25e02c4adbcbfdba05 () {
     <NextLink css={{"padding": "1em", "borderRadius": "0.5em", "backgroundColor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `#ADD8E6` : `transparent`, "textDecor": isTrue(((state__navbar_state.selected_tab) === ("graphs"))) ? `underline` : `none`, "&:hover": {"transform": "scale(1.1)", "textDecor": "underline"}}} href={`/graphs/6`} passHref={true}>
   {`Graph`}
 </NextLink>
-  )
-}
-
-export function Button_aa37913fbfff9bafdfa6991b200da2fe () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_1103c5a6136a6d97d4adae608c39e3b2 = useCallback((_e) => addEvents([Event("state.webcam_state.capture_and_process_webcam", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_1103c5a6136a6d97d4adae608c39e3b2}>
-  {`Start`}
-</RadixThemesButton>
   )
 }
 
@@ -159,9 +119,7 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
 </RadixThemesFlex>
-  <Button_aa37913fbfff9bafdfa6991b200da2fe/>
-  <Img_fe04a29112b85cd362a6fe8d7bab8bc1/>
-  <Fragment_3a7c8ba9118c7b795095bbb5575818b4/>
+  <Reactplayer_8d102028353de4560a40127830b14b27/>
 </RadixThemesFlex>
   <NextHead>
   <title>

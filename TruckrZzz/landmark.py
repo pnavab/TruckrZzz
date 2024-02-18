@@ -3,15 +3,15 @@ import imutils
 import dlib
 import cv2
 import numpy as np
-
-import os
+import math
 
 EYE_ASPECT_RATIO_THRESH = 1.0
 
-CONSECUTIVE_WARNING_THRESH = 20
+CONSECUTIVE_WARNING_THRESH = 10
 
 DETECTOR = dlib.get_frontal_face_detector()
-PREDICTOR = dlib.shape_predictor("./TruckrZzz/shape_predictor_68_face_landmarks.dat")
+PREDICTOR = dlib.shape_predictor(
+    "./TruckrZzz/shape_predictor_68_face_landmarks.dat")
 
 (L_START, L_END) = face_utils.FACIAL_LANDMARKS_68_IDXS["left_eye"]
 (R_START, R_END) = face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"]
@@ -54,10 +54,11 @@ class SleepDetector():
             right_eye_coords)
         total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
         if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
-            self.warning_count += 1
+            self.warning_count = min(
+                self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 2)
         else:
-            self.warning_count = 0
-            self.drowsy = False
+            self.warning_count = max(
+                self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
 
         self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
 
