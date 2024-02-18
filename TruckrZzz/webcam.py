@@ -5,7 +5,7 @@ from PIL import Image
 from TruckrZzz.components.navbar import navbar
 from TruckrZzz.landmark import SleepDetector
 
-detector = SleepDetector(visualize=False)
+detector = SleepDetector(visualize=True)
 
 
 class WebcamState(rx.State):
@@ -57,6 +57,23 @@ class FlashingState(rx.State):
 
 @rx.page(route="/webcam", title="webcam", on_load=WebcamState.capture_and_process_webcam)
 def webcam_page():
+
+    return rx.vstack(navbar(), (rx.chakra.center(
+        rx.chakra.box(
+            rx.chakra.image(src="/pngtree-iphone-14-png-image_6538682.png",
+                            width="150%", height="150%", z_index="-1"),
+            position="relative"
+        ),
+        rx.chakra.box(
+            rx.chakra.image(src=WebcamState.processed_frame,
+                            width="80%", height="auto"),
+            position="absolute",
+            top="40%",
+            left="50%",
+            transform="translate(-50%, -60%)"
+        ))
+    ), rx.audio(url="/alarm_long.mp3", playing=WebcamState.drowsy), align_items="center"
+    )
     return rx.vstack(
         navbar(),
         rx.image(src=WebcamState.processed_frame),

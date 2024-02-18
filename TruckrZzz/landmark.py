@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import math
 
-EYE_ASPECT_RATIO_THRESH = 0.8
+EYE_ASPECT_RATIO_THRESH = 0.75
 
 CONSECUTIVE_WARNING_THRESH = 12
 
@@ -24,6 +24,22 @@ def compute_eye_aspect_ratio(eye_coords):
     horz = np.linalg.norm(eye_coords[0] - eye_coords[3])
     ear = (left_vert + right_vert) / horz
     return ear
+
+
+def crop_center(image, percent_width=35):
+    # Calculate the new width based on the percentage
+    new_width = int(image.shape[1] * (percent_width / 100))
+
+    # Calculate the starting point for cropping
+    start_x = (image.shape[1] - new_width) // 2
+
+    # Calculate the ending point for cropping
+    end_x = start_x + new_width
+
+    # Crop the image
+    cropped_image = image[:, start_x:end_x]
+
+    return cropped_image
 
 
 class SleepDetector():
@@ -54,10 +70,10 @@ class SleepDetector():
         total_eye_aspect_ratio = left_eye_aspect_ratio + right_eye_aspect_ratio
         if total_eye_aspect_ratio < EYE_ASPECT_RATIO_THRESH:
             self.warning_count = min(
-                self.warning_count + 1, CONSECUTIVE_WARNING_THRESH * 1.5)
+                self.warning_count + 1, 20)
         else:
             self.warning_count = max(
-                self.warning_count - math.ceil(9/(self.warning_count+1)), 0)
+                self.warning_count - math.ceil(6/(self.warning_count+1)), 0)
 
         self.drowsy = self.warning_count > CONSECUTIVE_WARNING_THRESH
 
@@ -67,6 +83,7 @@ class SleepDetector():
             cv2.drawContours(frame, [left_eye_outline], -1, (0, 0, 255), 1)
             cv2.drawContours(
                 frame, [right_eye_outline], -1, (0, 0, 255), 1)
+            frame = crop_center(frame)
             if self.drowsy:
                 cv2.putText(frame, "ALERT", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
