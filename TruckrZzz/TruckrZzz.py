@@ -131,15 +131,15 @@ def index() -> rx.Component:
                     rx.spacer(),
                     rx.vstack(
                         rx.box(
-                            rx.image(src="/webcam.png", width="100%", height="100%", fit="cover"),
+                            rx.image(src="/Truck-park.png", width="100%", height="100%", fit="cover"),
                             width="100%",
                             height="35%"
                         ),
                         rx.spacer(),
-                        rx.heading("Webcam Integration",text_align="center", padding="5px", margin_top="15px", size="6"),
+                        rx.heading("Saving Lives",text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project incorporates facial recognition and landmarking technology leveraging the webcam to monitor the sleepiness level of truck drivers in real time. By analyzing facial cues and patterns, the system assesses signs of drowsiness, alerting the driver and playing a warning sound to wake the driver up. This innovative feature not only prioritizes the well-being of drivers but also enhances overall fleet management efficiency.", size="3", text_align="center"),
+                                rx.text("Approximately 40% of all heavy truck accidents are attributed to fatigue. With our webcam and livestream heart rate monitoring features, we aim to revolutionize truck driver safety. By tracking drivers' heart rates in real-time, we can detect signs of fatigue and alertness levels. Through this technology, we intervene proactively, providing timely alerts and support to keep drivers awake and alert during their shifts. We aspire to significantly reduce the percentage of truck driver deaths caused by sleepiness, fostering a safer and more sustainable future for the transportation industry.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -162,10 +162,10 @@ def index() -> rx.Component:
                     ),
                     rx.spacer(),
                     rx.vstack(
-                        rx.heading("Livestream Heartrate", text_align="center", padding="5px", margin_top="15px", size="6"),
+                        rx.heading("The Future", text_align="center", padding="5px", margin_top="15px", size="6"),
                         rx.fragment(
                             rx.box(
-                                rx.text("Our project integrates a real-time heart rate monitor to continuously track the heart rate of truck drivers during their journeys. By leveraging this data, our system provides insight into the driver's stress levels and  fatigue. With our advanced heart rate monitoring feature, we prioritize the health and performance of truck drivers, contributing to enhanced fleet management and overall operational excellence.", size="3", text_align="center"),
+                                rx.text("At TruckrZzz, our vision extends beyond the trucking industry to encompass all drivers and vehicles. Recognizing that accidents caused by fatigue are not exclusive to commercial truck drivers, we're committed to expanding our application to serve all motorists. Our goal is to leverage the same innovative webcam and livestream heart rate monitoring features and adapt them for use in any type of vehicle. With our comprehensive approach to driver safety, we're dedicated to creating safer roads for everyone, regardless of the vehicle they operate.", size="3", text_align="center"),
                                 margin_bottom="5px",
                                 margin_top="5px",
                                 margin_left="10px",
@@ -175,7 +175,7 @@ def index() -> rx.Component:
                         ),
                         rx.spacer(),
                         rx.box(
-                            rx.image(src="/heart-rate-banner.png", width="100%", height="100%", fit="cover"),
+                            rx.image(src="/happy-driver.png", width="100%", height="100%", fit="cover"),
                             width="100%",
                             height="35%"
                         ),
