@@ -3,15 +3,30 @@
 from rxconfig import config
 from TruckrZzz import *
 from TruckrZzz.components.navbar import navbar
-from TruckrZzz.graphs import *
+# from TruckrZzz.graphs import *
 from TruckrZzz.dashboard import *
 from TruckrZzz.components.footer import footer
 from TruckrZzz.webcam import *
+from sqlmodel import Field, SQLModel, select, JSON
+from sqlalchemy import Column, DateTime
+import sqlalchemy
 from fastapi import FastAPI, Request
 import reflex as rx
+import datetime
 
-docs_url = "https://reflex.dev/docs/getting-started/introduction"
-filename = f"{config.app_name}/{config.app_name}.py"
+class HeartRate(rx.Model, table=True):
+    id: int = Field(default=None, primary_key=True)
+    value: int
+    device_id: str
+    created_at: datetime.datetime = Field(
+        default=None,
+        sa_column=Column(
+            "created_at",
+            DateTime(timezone=True),
+            server_default=sqlalchemy.func.now(),
+        ),
+    )
+HeartRate.create_all()
 
 
 class State(rx.State):
@@ -203,7 +218,31 @@ app.add_cors()
 # @app.api.post
 async def api_test(request_body: Request):
     json_body = await request_body.json()
-    return {"processed": json_body}
+    val = json_body['val']
+    device_id = json_body['device_id']
+    output = None
+    if val > 120:
+        output = 9
+    elif val > 100:
+        output = 8
+    elif val > 90:
+        output = 7
+    elif val > 80:
+        output = 6
+    elif val > 70:
+        output = 5
+    elif val > 60:
+        output = 4
+    elif val > 55:
+        output = 3
+    elif val > 50:
+        output = 2
+    else:
+        output = 1
+    with rx.session() as session:
+        session.add(HeartRate(value=output, device_id=device_id))
+        session.commit()
+    return {"processed": "true", "output": output}
 
 
 
