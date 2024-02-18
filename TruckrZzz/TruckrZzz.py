@@ -51,7 +51,7 @@ def index() -> rx.Component:
             rx.box(
                 rx.heading(
                     rx.text("Saving Lives One ",margin_bottom="20px"),
-                    rx.text("ـﮩ٨ـHEARTBEATـﮩ٨ـ", color="red", margin_bottom="20px", font_size="1.2em"),
+                    rx.text("ـﮩ٨ـHEARTBEATـﮩ٨ـ", color="#a70000", margin_bottom="20px", font_size="1.2em"),
                     rx.text("at a Time"),
                     font_size="1.5em",
                     text_align="center",
